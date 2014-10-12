@@ -1,0 +1,1295 @@
++---------------------------------------------------------------------------+
+Custom Application: Version : UNKNOWN
+
+Copyright (c) 1979, 1999, Oracle Corporation. All rights reserved.
+
+CEMLIPERF module: CEMLI Performance Checker
++---------------------------------------------------------------------------+
+
+Current system time is 08-MAY-2013 20:55:00
+
++---------------------------------------------------------------------------+
+
+/dmilii/applmgr/CUSTOM/xbol/12.0.0/bin/CEMLIPerfTool[1802]: do_logging[87]: /autofs/upgrade/pmp/sac/cemli/perftool_start.log: cannot create [Permission denied]
+Info: Start of processing Logging done
+
+CEMLI Performance Tool version:1.3.2.2
+
+Info: udump directory from database server node is: /dmilii/udump
+
+df: `/tmilii/udump': Stale NFS file handle
+Info: database udump directory /dmilii/udump is mapped
+
+Info: Trace for XX_AR_REPCAJ_RES is not enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XX_AR_REPCAJ_RES
+
+Info: Trace for XX_SV_CLIENTES is not enabled
+
+Info: No new Trace file found for XX_SV_CLIENTES
+
+Info: Trace for XX_SV_FLEX_BANK_FILE is not enabled
+
+Info: No new Trace file found for XX_SV_FLEX_BANK_FILE
+
+Info: Trace for XX_AR_INVOICE_AGING_REPORT is not enabled
+
+Info: No new Trace file found for XX_AR_INVOICE_AGING_REPORT
+
+Info: Trace for XX_AR_PRINT_DOCS_3RD is enabled
+
+Info: No new Trace file found for XX_AR_PRINT_DOCS_3RD
+
+Info: Trace for XXINVONHANDAVAIL is enabled
+
+Info: No new Trace file found for XXINVONHANDAVAIL
+
+Info: Trace for XX_SV_PO_RAHORROS is enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XX_SV_PO_RAHORROS
+
+Info: Trace for XX_INV018 is not enabled
+
+Info: No new Trace file found for XX_INV018
+
+Info: Trace for XX_CREATE_APPLY_RECEIPT_AR is not enabled
+
+Info: No new Trace file found for XX_CREATE_APPLY_RECEIPT_AR
+
+Info: Trace for XXSVAPWHTXISSUING is enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: Apps Database version = 11.2.0.1.0
+
+looking for trace file name : /dmilii/udump/DMILII_ora_29583.trc
+
+Main trace file name found : /dmilii/applmgr/common/webapps/oacore/html/cemli_repository/trace_files/ora_29583.trc
+
+Begin parse_and_update_individual_tkprof
+
+prog_name=XXSVAPWHTXISSUING, tkprof_output=/dmilii/applmgr/common/webapps/oacore/html/cemli_repository/tkprof_files/ora_29583.tkprof, do_total_flag=TRUE
+
+SQL string=SELECT SUM(DAT.IVA_RETENIDO) FROM ( SELECT DISTINCT PV.SEGMENT1 SUPPLIER_NUMBER,
+
+Total string=total 97 0.84 0.95 0 16032 0 48
+
+SQL string=SELECT DISTINCT pv.vendor_id, AIA.INVOICE_ID, pv.segment1 SUPPLIER_NUMBER, pv.ve
+
+Total string=total 3 0.80 0.83 0 1026 0 6
+
+SQL string=SELECT SUM(AIL.AMOUNT) FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL AI WHERE A
+
+Total string=total 3505 0.70 0.73 0 43216 0 1752
+
+SQL string=SELECT -SUM(AID.AMOUNT) FROM APPS.AP_INVOICE_DISTRIBUTIONS_ALL AID, APPS.AP_INVO
+
+Total string=total 4333 0.56 0.70 0 74005 0 2166
+
+SQL string=SELECT SUM(DAT.SUMA) FROM ( SELECT DISTINCT PV.SEGMENT1 SUPPLIER_NUMBER, XX_UTIL
+
+Total string=total 49 0.61 0.47 0 8016 0 24
+
+SQL string=SELECT CASH_POSTED_FLAG FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOICE_ID = :B2
+
+Total string=total 1315 0.32 0.26 0 35332 0 438
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL A WHERE AIL.INVOICE_ID
+
+Total string=total 877 0.06 0.10 0 2920 0 0
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL WHERE AIL.INVOICE_ID = :B1 AND AIL.AMOU
+
+Total string=total 877 0.08 0.09 0 7811 0 0
+
+SQL string=SELECT NVL(SUM(NVL(AID.AMOUNT,0)), 0) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID, AP_
+
+Total string=total 877 0.10 0.09 0 9709 0 438
+
+SQL string=begin fnd_concurrent.init_request; end;
+
+Total string=total 1 0.05 0.06 0 911 24 1
+
+SQL string=SELECT NVL(SOB.SLA_LEDGER_CASH_BASIS_FLAG, ''N''), ASP.ORG_ID FROM AP_INVOICES_ALL
+
+Total string=total 877 0.04 0.03 0 2628 0 438
+
+SQL string=SELECT NVL(MATCH_STATUS_FLAG, ''Z'') FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOI
+
+Total string=total 1315 0.04 0.03 0 1752 0 438
+
+SQL string=SELECT NVL(FSP.PURCH_ENCUMBRANCE_FLAG,''N''), AI.ORG_ID, AI.FORCE_REVALIDATION_FLA
+
+Total string=total 877 0.03 0.02 0 2190 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID WHERE AID.INVOICE_ID = :B1
+
+Total string=total 877 0.01 0.02 0 1314 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_SELF_ASSESSED_TAX_DIST_ALL AID WHERE AID.INVOICE_ID = :B
+
+Total string=total 877 0.02 0.01 0 438 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B3 AND HOLD_LOOKUP_CODE IN
+
+Total string=total 877 0.05 0.01 0 876 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B1 AND RELEASE_LOOKUP_CODE
+
+Total string=total 877 0.02 0.01 0 876 0 438
+
+SQL string=SELECT AI.CANCELLED_DATE FROM AP_INVOICES_ALL AI WHERE AI.INVOICE_ID = :B1 call
+
+Total string=total 877 0.00 0.01 0 1314 0 438
+
+SQL string=SELECT file_data FROM xdo_lobs WHERE APPLICATION_SHORT_NAME =:1 AND lob_code=:2
+
+Total string=total 3 0.00 0.00 1 4 0 1
+
+SQL string=begin fnd_global.initialize(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12, :13, :14, :1
+
+Total string=total 3 0.01 0.00 0 0 0 3
+
+SQL string=SELECT DECODE (SUBSTR(LPAD(:B2 ,12,''0''),1,1), 1,DECODE(SUBSTR(LPAD(:B2 ,12, ''0'')
+
+Total string=total 49 0.00 0.00 0 0 0 24
+
+SQL string=BEGIN fnd_global.bless_next_init(''FND_PERMIT_0006''); FND_GLOBAL.APPS_INITIALIZE(
+
+Total string=total 1 0.00 0.00 0 0 0 1
+
+SQL string=SELECT ''TRACE_USER_DETAILS: TIMESTAMP=08-MAY-13:20:44:04: USER_NAME= SCASTANEDA@
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=select variable_name, value from fnd_concurrent_requests cr , fnd_env_context ec
+
+Total string=total 42 0.00 0.00 0 376 0 398
+
+SQL string=SELECT cv.value FROM xdo_config_values cv ,xdo_config_properties_b props ,xdo_lo
+
+Total string=total 3 0.00 0.00 0 47 0 1
+
+SQL string=BEGIN FND_CONC_STAT.COLLECT; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=Begin FND_GLOBAL.set_nls_context(p_nls_language=>:1,p_nls_territory=>:2, p_nls_n
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=BEGIN DBMS_SESSION.SET_SQL_TRACE(TRUE); END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=declare b boolean; retval VARCHAR2(1);begin b := fnd_concurrent.set_interim_stat
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=alter session set sql_trace=true call count cpu elapsed disk query current rows
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=SELECT NLS_DATE_LANGUAGE FROM (SELECT UTF8_DATE_LANGUAGE NLS_DATE_LANGUAGE FROM
+
+Total string=total 10 0.00 0.00 0 10 0 5
+
+SQL string=BEGIN FND_LOG_REPOSITORY.METRICS_EVENT_INT_WITH_CONTEXT;END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=UPDATE FND_CONCURRENT_REQUESTS SET INTERIM_STATUS_CODE = :B3 , COMPLETION_TEXT =
+
+Total string=total 2 0.00 0.00 0 3 2 1
+
+SQL string=BEGIN FND_CONCURRENT.SET_PREFERRED_RBS; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT SUBSTR(REPLACE(USER_CONCURRENT_PROGRAM_NAME,'''''''','' ''),1,240), SUBSTR(CONC
+
+Total string=total 3 0.00 0.00 0 6 0 1
+
+SQL string=SELECT Q.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_REQUESTS R, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 9 0 1
+
+SQL string=alter session set NLS_TERRITORY = "AMERICA" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=DELETE FROM FND_DEBUG_RULE_OPTIONS WHERE DEBUG_RULE_ID IN (SELECT DEBUG_RULE_ID
+
+Total string=total 2 0.00 0.00 0 1 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 5 0.00 0.00 0 11 0 1
+
+SQL string=SELECT ENABLE_ROUTINE, DISABLE_ROUTINE, DRO.DEBUG_OPTION_NAME, DRO.DEBUG_OPTION_
+
+Total string=total 3 0.00 0.00 0 1 0 0
+
+SQL string=SELECT LANGUAGE_CODE, NLS_LANGUAGE, NLS_TERRITORY, NLS_CODESET, DESCRIPTION, INS
+
+Total string=total 3 0.00 0.00 0 4 0 1
+
+SQL string=SELECT PROFILE_OPTION_ID, APPLICATION_ID, SITE_ENABLED_FLAG , APP_ENABLED_FLAG ,
+
+Total string=total 6 0.00 0.00 0 9 0 3
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 14 0.00 0.00 0 14 0 0
+
+SQL string=SELECT P.ROLLBACK_SEGMENT FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_REQUEST
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=begin fnd_date.initialize_with_calendar(:1, null, :2); end;
+
+Total string=total 5 0.00 0.00 0 0 0 5
+
+SQL string=begin fnd_client_info.set_org_context(:1); end;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT P.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=DELETE FROM FND_DEBUG_RULES WHERE (START_TIME IS NOT NULL AND END_TIME < SYSDATE
+
+Total string=total 2 0.00 0.00 0 3 0 0
+
+SQL string=alter session set NLS_LANGUAGE = "AMERICAN" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=SELECT DECODE(:B1 , ''P'', ''REPORTS'', ''I'', ''PLSQL_CP'', ''J'', ''JAVA_STORED_CP'', ''K'',
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=SELECT COUNT(1) FROM FND_LOG_METRICS WHERE TRANSACTION_CONTEXT_ID = :B1 call cou
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RR" call count cpu elapsed disk quer
+
+Total string=total 6 0.00 0.00 0 0 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 6 0.00 0.00 0 16 0 1
+
+SQL string=SELECT TO_CHAR(SYSDATE,''DD-MON-YY:HH24:MI:SS'') FROM SYS.DUAL call count cpu elap
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=ALTER SESSION SET SQL_TRACE = TRUE call count cpu elapsed disk query current row
+
+Total string=total 1 0.00 0.00 0 0 0 0
+
+SQL string=alter session set NLS_NUMERIC_CHARACTERS = ".," call count cpu elapsed disk quer
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 6 0.00 0.00 0 7 0 1
+
+SQL string=alter session set NLS_DATE_LANGUAGE = "AMERICAN" call count cpu elapsed disk que
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=select HIERARCHY_TYPE, SITE_ENABLED_FLAG, APP_ENABLED_FLAG, RESP_ENABLED_FLAG, U
+
+Total string=total 4 0.00 0.00 0 6 0 2
+
+SQL string=alter session set NLS_SORT = "BINARY" call count cpu elapsed disk query current
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=SELECT aferror.log c208812.mgr c209388.mgr c209411.mgr c210110.mgr c211278.mgr D
+
+Total string=total 9 0.00 0.00 0 0 0 7
+
+SQL string=SELECT R.RESPONSIBILITY_NAME FROM FND_RESPONSIBILITY_VL R WHERE R.RESPONSIBILITY
+
+Total string=total 2 0.00 0.00 0 5 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RRRR" call count cpu elapsed disk qu
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+End parse_and_update_individual_tkprof
+
+looking for trace file name : /dmilii/udump/DMILII_ora_29320.trc
+
+Main trace file name found : /dmilii/applmgr/common/webapps/oacore/html/cemli_repository/trace_files/ora_29320.trc
+
+Begin parse_and_update_individual_tkprof
+
+prog_name=XXSVAPWHTXISSUING, tkprof_output=/dmilii/applmgr/common/webapps/oacore/html/cemli_repository/tkprof_files/ora_29320.tkprof, do_total_flag=TRUE
+
+SQL string=SELECT SUM(DAT.IVA_RETENIDO) FROM ( SELECT DISTINCT PV.SEGMENT1 SUPPLIER_NUMBER,
+
+Total string=total 97 1.33 1.26 0 16032 0 48
+
+SQL string=SELECT DISTINCT pv.vendor_id, AIA.INVOICE_ID, pv.segment1 SUPPLIER_NUMBER, pv.ve
+
+Total string=total 3 0.79 0.84 1 1032 0 6
+
+SQL string=SELECT SUM(DAT.SUMA) FROM ( SELECT DISTINCT PV.SEGMENT1 SUPPLIER_NUMBER, XX_UTIL
+
+Total string=total 49 0.81 0.81 0 8016 0 24
+
+SQL string=SELECT SUM(AIL.AMOUNT) FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL AI WHERE A
+
+Total string=total 3505 0.68 0.71 0 43216 0 1752
+
+SQL string=SELECT -SUM(AID.AMOUNT) FROM APPS.AP_INVOICE_DISTRIBUTIONS_ALL AID, APPS.AP_INVO
+
+Total string=total 4333 0.54 0.68 0 74005 0 2166
+
+SQL string=SELECT CASH_POSTED_FLAG FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOICE_ID = :B2
+
+Total string=total 1315 0.28 0.25 0 35332 0 438
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL A WHERE AIL.INVOICE_ID
+
+Total string=total 877 0.13 0.11 0 2920 0 0
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL WHERE AIL.INVOICE_ID = :B1 AND AIL.AMOU
+
+Total string=total 877 0.15 0.09 0 7811 0 0
+
+SQL string=SELECT NVL(SUM(NVL(AID.AMOUNT,0)), 0) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID, AP_
+
+Total string=total 877 0.05 0.09 0 9709 0 438
+
+SQL string=begin fnd_concurrent.init_request; end;
+
+Total string=total 1 0.03 0.06 0 911 25 1
+
+SQL string=SELECT NVL(MATCH_STATUS_FLAG, ''Z'') FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOI
+
+Total string=total 1315 0.00 0.03 0 1752 0 438
+
+SQL string=SELECT NVL(SOB.SLA_LEDGER_CASH_BASIS_FLAG, ''N''), ASP.ORG_ID FROM AP_INVOICES_ALL
+
+Total string=total 877 0.05 0.03 0 2628 0 438
+
+SQL string=SELECT NVL(FSP.PURCH_ENCUMBRANCE_FLAG,''N''), AI.ORG_ID, AI.FORCE_REVALIDATION_FLA
+
+Total string=total 877 0.04 0.02 0 2190 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID WHERE AID.INVOICE_ID = :B1
+
+Total string=total 877 0.00 0.02 0 1314 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B3 AND HOLD_LOOKUP_CODE IN
+
+Total string=total 877 0.02 0.01 0 876 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_SELF_ASSESSED_TAX_DIST_ALL AID WHERE AID.INVOICE_ID = :B
+
+Total string=total 877 0.04 0.01 0 438 0 438
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B1 AND RELEASE_LOOKUP_CODE
+
+Total string=total 877 0.00 0.01 0 876 0 438
+
+SQL string=SELECT AI.CANCELLED_DATE FROM AP_INVOICES_ALL AI WHERE AI.INVOICE_ID = :B1 call
+
+Total string=total 877 0.01 0.01 0 1314 0 438
+
+SQL string=SELECT DECODE (SUBSTR(LPAD(:B2 ,12,''0''),1,1), 1,DECODE(SUBSTR(LPAD(:B2 ,12, ''0'')
+
+Total string=total 49 0.02 0.01 0 0 0 24
+
+SQL string=begin fnd_global.initialize(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12, :13, :14, :1
+
+Total string=total 3 0.00 0.00 0 0 0 3
+
+SQL string=SELECT file_data FROM xdo_lobs WHERE APPLICATION_SHORT_NAME =:1 AND lob_code=:2
+
+Total string=total 3 0.00 0.00 1 4 0 1
+
+SQL string=SELECT ''TRACE_USER_DETAILS: TIMESTAMP=08-MAY-13:20:43:11: USER_NAME= SCASTANEDA@
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=BEGIN fnd_global.bless_next_init(''FND_PERMIT_0006''); FND_GLOBAL.APPS_INITIALIZE(
+
+Total string=total 1 0.00 0.00 0 0 0 1
+
+SQL string=select variable_name, value from fnd_concurrent_requests cr , fnd_env_context ec
+
+Total string=total 42 0.00 0.00 0 341 0 398
+
+SQL string=SELECT cv.value FROM xdo_config_values cv ,xdo_config_properties_b props ,xdo_lo
+
+Total string=total 3 0.00 0.00 0 47 0 1
+
+SQL string=BEGIN FND_CONC_STAT.COLLECT; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=Begin FND_GLOBAL.set_nls_context(p_nls_language=>:1,p_nls_territory=>:2, p_nls_n
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=BEGIN DBMS_SESSION.SET_SQL_TRACE(TRUE); END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=declare b boolean; retval VARCHAR2(1);begin b := fnd_concurrent.set_interim_stat
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=alter session set sql_trace=true call count cpu elapsed disk query current rows
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=SELECT NLS_DATE_LANGUAGE FROM (SELECT UTF8_DATE_LANGUAGE NLS_DATE_LANGUAGE FROM
+
+Total string=total 10 0.00 0.00 0 10 0 5
+
+SQL string=SELECT Q.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_REQUESTS R, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 9 0 1
+
+SQL string=BEGIN FND_LOG_REPOSITORY.METRICS_EVENT_INT_WITH_CONTEXT;END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT SUBSTR(REPLACE(USER_CONCURRENT_PROGRAM_NAME,'''''''','' ''),1,240), SUBSTR(CONC
+
+Total string=total 3 0.00 0.00 0 6 0 1
+
+SQL string=BEGIN FND_CONCURRENT.SET_PREFERRED_RBS; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=DELETE FROM FND_DEBUG_RULE_OPTIONS WHERE DEBUG_RULE_ID IN (SELECT DEBUG_RULE_ID
+
+Total string=total 2 0.00 0.00 0 1 0 0
+
+SQL string=SELECT ENABLE_ROUTINE, DISABLE_ROUTINE, DRO.DEBUG_OPTION_NAME, DRO.DEBUG_OPTION_
+
+Total string=total 3 0.00 0.00 0 1 0 0
+
+SQL string=alter session set NLS_TERRITORY = "AMERICA" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 5 0.00 0.00 0 11 0 1
+
+SQL string=UPDATE FND_CONCURRENT_REQUESTS SET INTERIM_STATUS_CODE = :B3 , COMPLETION_TEXT =
+
+Total string=total 2 0.00 0.00 0 3 2 1
+
+SQL string=SELECT LANGUAGE_CODE, NLS_LANGUAGE, NLS_TERRITORY, NLS_CODESET, DESCRIPTION, INS
+
+Total string=total 3 0.00 0.00 0 4 0 1
+
+SQL string=SELECT P.ROLLBACK_SEGMENT FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_REQUEST
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=begin fnd_client_info.set_org_context(:1); end;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=DELETE FROM FND_DEBUG_RULES WHERE (START_TIME IS NOT NULL AND END_TIME < SYSDATE
+
+Total string=total 2 0.00 0.00 0 3 0 0
+
+SQL string=SELECT P.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=SELECT PROFILE_OPTION_ID, APPLICATION_ID, SITE_ENABLED_FLAG , APP_ENABLED_FLAG ,
+
+Total string=total 6 0.00 0.00 0 9 0 3
+
+SQL string=begin fnd_date.initialize_with_calendar(:1, null, :2); end;
+
+Total string=total 5 0.00 0.00 0 0 0 5
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 14 0.00 0.00 0 14 0 0
+
+SQL string=alter session set NLS_LANGUAGE = "AMERICAN" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=SELECT DECODE(:B1 , ''P'', ''REPORTS'', ''I'', ''PLSQL_CP'', ''J'', ''JAVA_STORED_CP'', ''K'',
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 6 0.00 0.00 0 16 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RR" call count cpu elapsed disk quer
+
+Total string=total 6 0.00 0.00 0 0 0 0
+
+SQL string=SELECT TO_CHAR(SYSDATE,''DD-MON-YY:HH24:MI:SS'') FROM SYS.DUAL call count cpu elap
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=SELECT COUNT(1) FROM FND_LOG_METRICS WHERE TRANSACTION_CONTEXT_ID = :B1 call cou
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_DATE_LANGUAGE = "AMERICAN" call count cpu elapsed disk que
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=ALTER SESSION SET SQL_TRACE = TRUE call count cpu elapsed disk query current row
+
+Total string=total 1 0.00 0.00 0 0 0 0
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 6 0.00 0.00 0 7 0 1
+
+SQL string=alter session set NLS_NUMERIC_CHARACTERS = ".," call count cpu elapsed disk quer
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=select HIERARCHY_TYPE, SITE_ENABLED_FLAG, APP_ENABLED_FLAG, RESP_ENABLED_FLAG, U
+
+Total string=total 4 0.00 0.00 0 6 0 2
+
+SQL string=SELECT aferror.log c208812.mgr c209388.mgr c209411.mgr c210110.mgr c211278.mgr D
+
+Total string=total 9 0.00 0.00 0 0 0 7
+
+SQL string=alter session set NLS_SORT = "BINARY" call count cpu elapsed disk query current
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=SELECT R.RESPONSIBILITY_NAME FROM FND_RESPONSIBILITY_VL R WHERE R.RESPONSIBILITY
+
+Total string=total 2 0.00 0.00 0 5 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RRRR" call count cpu elapsed disk qu
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+End parse_and_update_individual_tkprof
+
+Info: Trace for XXAPINVCNV is enabled
+
+Info: No new Trace file found for XXAPINVCNV
+
+Info: Trace for XX_GL_HN_LIST_GTOS is enabled
+
+Info: No new Trace file found for XX_GL_HN_LIST_GTOS
+
+Info: Trace for XXINVSLOWMOVING is enabled
+
+Info: No new Trace file found for XXINVSLOWMOVING
+
+Info: Trace for XXPOORDERMONTHMIC is enabled
+
+Info: No new Trace file found for XXPOORDERMONTHMIC
+
+Info: Trace for XXPOCHIST is enabled
+
+Info: No new Trace file found for XXPOCHIST
+
+Info: Trace for XLAACCUP is not enabled
+
+Info: No new Trace file found for XLAACCUP
+
+Info: Trace for XXSVPURGTEMPEXTBANKACCTS is not enabled
+
+Info: No new Trace file found for XXSVPURGTEMPEXTBANKACCTS
+
+Info: Trace for XX_SV_MAESTRO_AS400 is not enabled
+
+Info: No new Trace file found for XX_SV_MAESTRO_AS400
+
+Info: Trace for XXSVUPDATECHECKSTATUS is not enabled
+
+Info: No new Trace file found for XXSVUPDATECHECKSTATUS
+
+Info: Trace for XX_AR_REPCAJ_MES is not enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XX_AR_REPCAJ_MES
+
+Info: Trace for XX_AR_PRINT_CCF_3RD is enabled
+
+Info: No new Trace file found for XX_AR_PRINT_CCF_3RD
+
+Info: Trace for CSTCRACC is not enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for CSTCRACC
+
+Info: Trace for XX_SV_AP_UPDATE_SUPPLIER_SITES is not enabled
+
+Info: No new Trace file found for XX_SV_AP_UPDATE_SUPPLIER_SITES
+
+Info: Trace for XXPOMAILSENDER is not enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XXPOMAILSENDER
+
+Info: Trace for XLAACCPB is not enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XLAACCPB
+
+Info: Trace for XX_TRAN_CONT_INV is not enabled
+
+Info: No new Trace file found for XX_TRAN_CONT_INV
+
+Info: Trace for XX_SV_UPDATE_AS400 is not enabled
+
+Info: No new Trace file found for XX_SV_UPDATE_AS400
+
+Info: Trace for XX_SV_CST_KARDEX is enabled
+
+Info: No new Trace file found for XX_SV_CST_KARDEX
+
+Info: Trace for XXRPOP2P is enabled
+
+Info: No new Trace file found for XXRPOP2P
+
+Info: Trace for XXSVAPWHTXREPORT is enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: Apps Database version = 11.2.0.1.0
+
+looking for trace file name : /dmilii/udump/DMILII_ora_27785.trc
+
+Main trace file name found : /dmilii/applmgr/common/webapps/oacore/html/cemli_repository/trace_files/ora_27785.trc
+
+Begin parse_and_update_individual_tkprof
+
+prog_name=XXSVAPWHTXREPORT, tkprof_output=/dmilii/applmgr/common/webapps/oacore/html/cemli_repository/tkprof_files/ora_27785.tkprof, do_total_flag=TRUE
+
+SQL string=SELECT DISTINCT pv.segment1 SUPPLIER_NUMBER, -- DECODE ( -- LTRIM ( -- RTRIM (RE
+
+Total string=total 3 0.52 0.76 19 817 0 6
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL WHERE AIL.INVOICE_ID = :B1 AND AIL.AMOU
+
+Total string=total 31 0.00 0.14 43 237 0 0
+
+SQL string=begin fnd_concurrent.init_request; end;
+
+Total string=total 1 0.03 0.05 0 691 24 1
+
+SQL string=SELECT NVL(SUM(NVL(AID.AMOUNT,0)), 0) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID, AP_
+
+Total string=total 31 0.00 0.03 7 311 0 15
+
+SQL string=SELECT SUM(AIL.AMOUNT) FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL AI WHERE A
+
+Total string=total 49 0.00 0.02 2 592 0 24
+
+SQL string=SELECT -SUM(AID.AMOUNT) FROM APPS.AP_INVOICE_DISTRIBUTIONS_ALL AID, APPS.AP_INVO
+
+Total string=total 79 0.00 0.01 1 1239 0 39
+
+SQL string=SELECT COUNT(*) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID WHERE AID.INVOICE_ID = :B1
+
+Total string=total 31 0.00 0.01 7 45 0 15
+
+SQL string=SELECT CASH_POSTED_FLAG FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOICE_ID = :B2
+
+Total string=total 46 0.00 0.00 0 1244 0 15
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B1 AND RELEASE_LOOKUP_CODE
+
+Total string=total 31 0.00 0.00 2 31 0 15
+
+SQL string=SELECT NVL(FSP.PURCH_ENCUMBRANCE_FLAG,''N''), AI.ORG_ID, AI.FORCE_REVALIDATION_FLA
+
+Total string=total 31 0.00 0.00 2 75 0 15
+
+SQL string=SELECT file_data FROM xdo_lobs WHERE APPLICATION_SHORT_NAME =:1 AND lob_code=:2
+
+Total string=total 3 0.00 0.00 1 4 0 1
+
+SQL string=begin fnd_global.initialize(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12, :13, :14, :1
+
+Total string=total 3 0.00 0.00 0 0 0 3
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL A WHERE AIL.INVOICE_ID
+
+Total string=total 31 0.00 0.00 0 103 0 0
+
+SQL string=select variable_name, value from fnd_concurrent_requests cr , fnd_env_context ec
+
+Total string=total 42 0.00 0.00 0 331 0 398
+
+SQL string=BEGIN fnd_global.bless_next_init(''FND_PERMIT_0006''); FND_GLOBAL.APPS_INITIALIZE(
+
+Total string=total 1 0.00 0.00 0 0 0 1
+
+SQL string=Begin FND_GLOBAL.set_nls_context(p_nls_language=>:1,p_nls_territory=>:2, p_nls_n
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT ''TRACE_USER_DETAILS: TIMESTAMP=08-MAY-13:20:37:22: USER_NAME= SCASTANEDA@
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=SELECT NVL(SOB.SLA_LEDGER_CASH_BASIS_FLAG, ''N''), ASP.ORG_ID FROM AP_INVOICES_ALL
+
+Total string=total 31 0.00 0.00 0 90 0 15
+
+SQL string=SELECT NVL(MATCH_STATUS_FLAG, ''Z'') FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOI
+
+Total string=total 46 0.00 0.00 0 60 0 15
+
+SQL string=BEGIN FND_CONC_STAT.COLLECT; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT cv.value FROM xdo_config_values cv ,xdo_config_properties_b props ,xdo_lo
+
+Total string=total 3 0.00 0.00 0 47 0 1
+
+SQL string=select FVT.DESCRIPTION OPERATING_UNIT ,GB.NAME LEDGER_NAME ,PS.PERIOD_NAME ,to_c
+
+Total string=total 3 0.00 0.00 0 17 0 1
+
+SQL string=BEGIN DBMS_SESSION.SET_SQL_TRACE(TRUE); END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B3 AND HOLD_LOOKUP_CODE IN
+
+Total string=total 31 0.00 0.00 0 31 0 15
+
+SQL string=SELECT NLS_DATE_LANGUAGE FROM (SELECT UTF8_DATE_LANGUAGE NLS_DATE_LANGUAGE FROM
+
+Total string=total 10 0.00 0.00 0 10 0 5
+
+SQL string=SELECT COUNT(*) FROM AP_SELF_ASSESSED_TAX_DIST_ALL AID WHERE AID.INVOICE_ID = :B
+
+Total string=total 31 0.00 0.00 0 15 0 15
+
+SQL string=SELECT AI.CANCELLED_DATE FROM AP_INVOICES_ALL AI WHERE AI.INVOICE_ID = :B1 call
+
+Total string=total 31 0.00 0.00 0 45 0 15
+
+SQL string=declare b boolean; retval VARCHAR2(1);begin b := fnd_concurrent.set_interim_stat
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=alter session set sql_trace=true call count cpu elapsed disk query current rows
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=BEGIN FND_LOG_REPOSITORY.METRICS_EVENT_INT_WITH_CONTEXT;END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT Q.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_REQUESTS R, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 9 0 1
+
+SQL string=BEGIN FND_CONCURRENT.SET_PREFERRED_RBS; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_TERRITORY = "AMERICA" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=SELECT SUBSTR(REPLACE(USER_CONCURRENT_PROGRAM_NAME,'''''''','' ''),1,240), SUBSTR(CONC
+
+Total string=total 3 0.00 0.00 0 6 0 1
+
+SQL string=UPDATE FND_CONCURRENT_REQUESTS SET INTERIM_STATUS_CODE = :B3 , COMPLETION_TEXT =
+
+Total string=total 2 0.00 0.00 0 3 2 1
+
+SQL string=DELETE FROM FND_DEBUG_RULE_OPTIONS WHERE DEBUG_RULE_ID IN (SELECT DEBUG_RULE_ID
+
+Total string=total 2 0.00 0.00 0 1 0 0
+
+SQL string=SELECT LANGUAGE_CODE, NLS_LANGUAGE, NLS_TERRITORY, NLS_CODESET, DESCRIPTION, INS
+
+Total string=total 3 0.00 0.00 0 4 0 1
+
+SQL string=SELECT ENABLE_ROUTINE, DISABLE_ROUTINE, DRO.DEBUG_OPTION_NAME, DRO.DEBUG_OPTION_
+
+Total string=total 3 0.00 0.00 0 1 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 5 0.00 0.00 0 11 0 1
+
+SQL string=SELECT P.ROLLBACK_SEGMENT FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_REQUEST
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 14 0.00 0.00 0 14 0 0
+
+SQL string=begin fnd_client_info.set_org_context(:1); end;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=begin fnd_date.initialize_with_calendar(:1, null, :2); end;
+
+Total string=total 5 0.00 0.00 0 0 0 5
+
+SQL string=SELECT PROFILE_OPTION_ID, APPLICATION_ID, SITE_ENABLED_FLAG , APP_ENABLED_FLAG ,
+
+Total string=total 6 0.00 0.00 0 9 0 3
+
+SQL string=SELECT P.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=DELETE FROM FND_DEBUG_RULES WHERE (START_TIME IS NOT NULL AND END_TIME < SYSDATE
+
+Total string=total 2 0.00 0.00 0 3 0 0
+
+SQL string=alter session set NLS_LANGUAGE = "AMERICAN" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=SELECT DECODE(:B1 , ''P'', ''REPORTS'', ''I'', ''PLSQL_CP'', ''J'', ''JAVA_STORED_CP'', ''K'',
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=SELECT TO_CHAR (SYSDATE, ''DD/MM/YYYY HH24:MI:SS'') FECHA_EJECUCION FROM dual call
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RR" call count cpu elapsed disk quer
+
+Total string=total 6 0.00 0.00 0 0 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 6 0.00 0.00 0 16 0 1
+
+SQL string=SELECT COUNT(1) FROM FND_LOG_METRICS WHERE TRANSACTION_CONTEXT_ID = :B1 call cou
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=ALTER SESSION SET SQL_TRACE = TRUE call count cpu elapsed disk query current row
+
+Total string=total 1 0.00 0.00 0 0 0 0
+
+SQL string=SELECT TO_CHAR(SYSDATE,''DD-MON-YY:HH24:MI:SS'') FROM SYS.DUAL call count cpu elap
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_NUMERIC_CHARACTERS = ".," call count cpu elapsed disk quer
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=alter session set NLS_SORT = "BINARY" call count cpu elapsed disk query current
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=SELECT aferror.log c208812.mgr c209388.mgr c209411.mgr c210110.mgr c211278.mgr D
+
+Total string=total 9 0.00 0.00 0 0 0 7
+
+SQL string=alter session set NLS_DATE_LANGUAGE = "AMERICAN" call count cpu elapsed disk que
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 6 0.00 0.00 0 7 0 1
+
+SQL string=select HIERARCHY_TYPE, SITE_ENABLED_FLAG, APP_ENABLED_FLAG, RESP_ENABLED_FLAG, U
+
+Total string=total 4 0.00 0.00 0 6 0 2
+
+SQL string=SELECT R.RESPONSIBILITY_NAME FROM FND_RESPONSIBILITY_VL R WHERE R.RESPONSIBILITY
+
+Total string=total 2 0.00 0.00 0 5 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RRRR" call count cpu elapsed disk qu
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+End parse_and_update_individual_tkprof
+
+looking for trace file name : /dmilii/udump/DMILII_ora_23074.trc
+
+Main trace file name found : /dmilii/applmgr/common/webapps/oacore/html/cemli_repository/trace_files/ora_23074.trc
+
+Begin parse_and_update_individual_tkprof
+
+prog_name=XXSVAPWHTXREPORT, tkprof_output=/dmilii/applmgr/common/webapps/oacore/html/cemli_repository/tkprof_files/ora_23074.tkprof, do_total_flag=TRUE
+
+SQL string=SELECT DISTINCT pv.segment1 SUPPLIER_NUMBER, -- DECODE ( -- LTRIM ( -- RTRIM (RE
+
+Total string=total 3 0.55 2.78 551 712 0 0
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL WHERE AIL.INVOICE_ID = :B1 AND AIL.AMOU
+
+Total string=total 59 0.00 0.23 42 364 0 0
+
+SQL string=SELECT CASH_POSTED_FLAG FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOICE_ID = :B2
+
+Total string=total 88 0.01 0.17 14 2424 0 29
+
+SQL string=SELECT NLS_DATE_LANGUAGE FROM (SELECT UTF8_DATE_LANGUAGE NLS_DATE_LANGUAGE FROM
+
+Total string=total 10 0.00 0.14 0 10 0 5
+
+SQL string=SELECT -SUM(AID.AMOUNT) FROM APPS.AP_INVOICE_DISTRIBUTIONS_ALL AID, APPS.AP_INVO
+
+Total string=total 59 0.01 0.12 5 462 0 29
+
+SQL string=SELECT NVL(FSP.PURCH_ENCUMBRANCE_FLAG,''N''), AI.ORG_ID, AI.FORCE_REVALIDATION_FLA
+
+Total string=total 59 0.01 0.07 7 145 0 29
+
+SQL string=SELECT COUNT(*) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID WHERE AID.INVOICE_ID = :B1
+
+Total string=total 59 0.00 0.07 7 87 0 29
+
+SQL string=begin fnd_concurrent.init_request; end;
+
+Total string=total 1 0.03 0.05 0 689 24 1
+
+SQL string=SELECT NVL(MATCH_STATUS_FLAG, ''Z'') FROM AP_INVOICE_DISTRIBUTIONS_ALL WHERE INVOI
+
+Total string=total 88 0.00 0.04 0 116 0 29
+
+SQL string=SELECT NVL(SOB.SLA_LEDGER_CASH_BASIS_FLAG, ''N''), ASP.ORG_ID FROM AP_INVOICES_ALL
+
+Total string=total 59 0.00 0.03 1 174 0 29
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B3 AND HOLD_LOOKUP_CODE IN
+
+Total string=total 59 0.00 0.03 0 58 0 29
+
+SQL string=SELECT NVL(SUM(NVL(AID.AMOUNT,0)), 0) FROM AP_INVOICE_DISTRIBUTIONS_ALL AID, AP_
+
+Total string=total 59 0.00 0.03 8 413 0 29
+
+SQL string=select variable_name, value from fnd_concurrent_requests cr , fnd_env_context ec
+
+Total string=total 42 0.00 0.03 7 333 0 398
+
+SQL string=select FVT.DESCRIPTION OPERATING_UNIT ,GB.NAME LEDGER_NAME ,PS.PERIOD_NAME ,to_c
+
+Total string=total 3 0.00 0.02 2 17 0 1
+
+SQL string=SELECT Q.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_REQUESTS R, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.02 0 9 0 1
+
+SQL string=SELECT COUNT(*) FROM AP_SELF_ASSESSED_TAX_DIST_ALL AID WHERE AID.INVOICE_ID = :B
+
+Total string=total 59 0.00 0.02 1 29 0 29
+
+SQL string=SELECT file_data FROM xdo_lobs WHERE APPLICATION_SHORT_NAME =:1 AND lob_code=:2
+
+Total string=total 3 0.00 0.02 2 4 0 1
+
+SQL string=SELECT ''TRACE_USER_DETAILS: TIMESTAMP=08-MAY-13:20:18:03: USER_NAME= SCASTANEDA@
+
+Total string=total 2 0.00 0.01 0 0 0 0
+
+SQL string=SELECT ENABLE_ROUTINE, DISABLE_ROUTINE, DRO.DEBUG_OPTION_NAME, DRO.DEBUG_OPTION_
+
+Total string=total 3 0.00 0.01 0 1 0 0
+
+SQL string=SELECT SUBSTR(REPLACE(USER_CONCURRENT_PROGRAM_NAME,'''''''','' ''),1,240), SUBSTR(CONC
+
+Total string=total 3 0.00 0.01 0 6 0 1
+
+SQL string=SELECT ''N'' FROM AP_INVOICE_LINES_ALL AIL, AP_INVOICES_ALL A WHERE AIL.INVOICE_ID
+
+Total string=total 59 0.00 0.01 0 197 0 0
+
+SQL string=SELECT COUNT(*) FROM AP_HOLDS_ALL WHERE INVOICE_ID = :B1 AND RELEASE_LOOKUP_CODE
+
+Total string=total 59 0.00 0.01 4 58 0 29
+
+SQL string=UPDATE FND_CONCURRENT_REQUESTS SET INTERIM_STATUS_CODE = :B3 , COMPLETION_TEXT =
+
+Total string=total 2 0.00 0.01 0 3 2 1
+
+SQL string=begin fnd_global.initialize(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12, :13, :14, :1
+
+Total string=total 3 0.00 0.00 0 0 0 3
+
+SQL string=SELECT AI.CANCELLED_DATE FROM AP_INVOICES_ALL AI WHERE AI.INVOICE_ID = :B1 call
+
+Total string=total 59 0.00 0.00 0 87 0 29
+
+SQL string=SELECT P.RESOURCE_CONSUMER_GROUP FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=BEGIN fnd_global.bless_next_init(''FND_PERMIT_0006''); FND_GLOBAL.APPS_INITIALIZE(
+
+Total string=total 1 0.00 0.00 0 0 0 1
+
+SQL string=BEGIN DBMS_SESSION.SET_SQL_TRACE(TRUE); END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT cv.value FROM xdo_config_values cv ,xdo_config_properties_b props ,xdo_lo
+
+Total string=total 3 0.00 0.00 0 47 0 1
+
+SQL string=Begin FND_GLOBAL.set_nls_context(p_nls_language=>:1,p_nls_territory=>:2, p_nls_n
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=BEGIN FND_CONC_STAT.COLLECT; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT TO_CHAR (SYSDATE, ''DD/MM/YYYY HH24:MI:SS'') FECHA_EJECUCION FROM dual call
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=declare b boolean; retval VARCHAR2(1);begin b := fnd_concurrent.set_interim_stat
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=alter session set sql_trace=true call count cpu elapsed disk query current rows
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+SQL string=BEGIN FND_LOG_REPOSITORY.METRICS_EVENT_INT_WITH_CONTEXT;END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=BEGIN FND_CONCURRENT.SET_PREFERRED_RBS; END;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_TERRITORY = "AMERICA" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=SELECT TO_CHAR(SYSDATE,''DD-MON-YY:HH24:MI:SS'') FROM SYS.DUAL call count cpu elap
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=DELETE FROM FND_DEBUG_RULE_OPTIONS WHERE DEBUG_RULE_ID IN (SELECT DEBUG_RULE_ID
+
+Total string=total 2 0.00 0.00 0 1 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 5 0.00 0.00 0 11 0 1
+
+SQL string=SELECT LANGUAGE_CODE, NLS_LANGUAGE, NLS_TERRITORY, NLS_CODESET, DESCRIPTION, INS
+
+Total string=total 3 0.00 0.00 0 4 0 1
+
+SQL string=SELECT P.ROLLBACK_SEGMENT FROM FND_CONCURRENT_PROGRAMS P, FND_CONCURRENT_REQUEST
+
+Total string=total 3 0.00 0.00 0 7 0 1
+
+SQL string=begin fnd_client_info.set_org_context(:1); end;
+
+Total string=total 2 0.00 0.00 0 0 0 1
+
+SQL string=SELECT PROFILE_OPTION_ID, APPLICATION_ID, SITE_ENABLED_FLAG , APP_ENABLED_FLAG ,
+
+Total string=total 6 0.00 0.00 0 9 0 3
+
+SQL string=begin fnd_date.initialize_with_calendar(:1, null, :2); end;
+
+Total string=total 5 0.00 0.00 0 0 0 5
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 14 0.00 0.00 0 14 0 0
+
+SQL string=alter session set NLS_LANGUAGE = "AMERICAN" call count cpu elapsed disk query cu
+
+Total string=total 10 0.00 0.00 0 0 0 0
+
+SQL string=DELETE FROM FND_DEBUG_RULES WHERE (START_TIME IS NOT NULL AND END_TIME < SYSDATE
+
+Total string=total 2 0.00 0.00 0 3 0 0
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RR" call count cpu elapsed disk quer
+
+Total string=total 6 0.00 0.00 0 0 0 0
+
+SQL string=select V.PROFILE_OPTION_VALUE from FND_PROFILE_OPTIONS O, FND_PROFILE_OPTION_VAL
+
+Total string=total 6 0.00 0.00 0 16 0 1
+
+SQL string=SELECT DECODE(:B1 , ''P'', ''REPORTS'', ''I'', ''PLSQL_CP'', ''J'', ''JAVA_STORED_CP'', ''K'',
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=SELECT COUNT(1) FROM FND_LOG_METRICS WHERE TRANSACTION_CONTEXT_ID = :B1 call cou
+
+Total string=total 3 0.00 0.00 0 0 0 1
+
+SQL string=alter session set NLS_NUMERIC_CHARACTERS = ".," call count cpu elapsed disk quer
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=ALTER SESSION SET SQL_TRACE = TRUE call count cpu elapsed disk query current row
+
+Total string=total 1 0.00 0.00 0 0 0 0
+
+SQL string=alter session set NLS_DATE_LANGUAGE = "AMERICAN" call count cpu elapsed disk que
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=alter session set NLS_SORT = "BINARY" call count cpu elapsed disk query current
+
+Total string=total 8 0.00 0.00 0 0 0 0
+
+SQL string=SELECT PROFILE_OPTION_VALUE FROM FND_PROFILE_OPTION_VALUES WHERE PROFILE_OPTION_
+
+Total string=total 6 0.00 0.00 0 7 0 1
+
+SQL string=SELECT aferror.log c208812.mgr c209388.mgr c209411.mgr c210110.mgr c211278.mgr D
+
+Total string=total 9 0.00 0.00 0 0 0 7
+
+SQL string=select HIERARCHY_TYPE, SITE_ENABLED_FLAG, APP_ENABLED_FLAG, RESP_ENABLED_FLAG, U
+
+Total string=total 4 0.00 0.00 0 6 0 2
+
+SQL string=SELECT R.RESPONSIBILITY_NAME FROM FND_RESPONSIBILITY_VL R WHERE R.RESPONSIBILITY
+
+Total string=total 2 0.00 0.00 0 5 0 1
+
+SQL string=alter session set NLS_DATE_FORMAT = "DD-MON-RRRR" call count cpu elapsed disk qu
+
+Total string=total 2 0.00 0.00 0 0 0 0
+
+End parse_and_update_individual_tkprof
+
+Info: Trace for XXSVAPWHTXNMBRS is enabled
+
+Info: No new Trace file found for XXSVAPWHTXNMBRS
+
+Info: Trace for XXARHNSENBLO is enabled
+
+Info: No new Trace file found for XXARHNSENBLO
+
+Info: Trace for XXARHNSEBLOCK is not enabled
+
+Info: No new Trace file found for XXARHNSEBLOCK
+
+Info: Trace for XXAPHNFAC_OC is not enabled
+
+Info: No new Trace file found for XXAPHNFAC_OC
+
+Info: Trace for XX_MIC_VALIDATE_ITEMS is enabled
+
+Info: No new Trace file found for XX_MIC_VALIDATE_ITEMS
+
+Info: Trace for XXRECEIPTCASHAPPLY is not enabled
+
+Info: No new Trace file found for XXRECEIPTCASHAPPLY
+
+Info: Trace for XXAP_SUPPLIER_BANK_ACC_SITE is not enabled
+
+Info: No new Trace file found for XXAP_SUPPLIER_BANK_ACC_SITE
+
+Info: Trace for XXHNARESTADOCUENTA is not enabled
+
+Info: No new Trace file found for XXHNARESTADOCUENTA
+
+Info: Trace for XX_AR_REG_TRANS is not enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XX_AR_REG_TRANS
+
+Info: Trace for XXHNPOCAPEXTRACKING is enabled
+
+Info: No new Trace file found for XXHNPOCAPEXTRACKING
+
+Info: Trace for XX_INV_MTL_AGENCIA_MISC_ISSUE is not enabled
+
+Info: No new Trace file found for XX_INV_MTL_AGENCIA_MISC_ISSUE
+
+Info: Trace for XX_AR_HN_IMPTO is not enabled
+
+Info: No new Trace file found for XX_AR_HN_IMPTO
+
+Info: Trace for XX_TRAN_INV_SERIE is not enabled
+
+Info: No new Trace file found for XX_TRAN_INV_SERIE
+
+Info: Trace for XX_SV_AP_PURGESUPSITES is not enabled
+
+Info: No new Trace file found for XX_SV_AP_PURGESUPSITES
+
+Info: Trace for XX_AR_RECEIPT_METH is enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XX_AR_RECEIPT_METH
+
+Info: Trace for XX_AR_REG_FACTS is enabled
+
+/usr/bin/cksum: /dmilii/applmgr/1200/xdo/12.0.0/bin/JCP4XDODataEngine: No such file or directory
+Info: No new Trace file found for XX_AR_REG_FACTS
+
+Info: Trace for XXGLACCOENTRIS is enabled
+
+Info: No new Trace file found for XXGLACCOENTRIS
+
+Info: Trace for XXIEGTAPBUY is enabled
+
+Info: No new Trace file found for XXIEGTAPBUY
+
+Info: updating reports
+
+Info: Completed updating report
+
+Info: The report can be found in the following url
+
+Info: http://vmohsmili007.oracleoutsourcing.com:10715/OA_HTML/cemli_repository/html_files/cemliperfviewer.html
+
+Info: https://tigoebsodev.oracleoutsourcing.com:443/OA_HTML/cemli_repository/html_files/cemliperfviewer.html
+
+/dmilii/applmgr/CUSTOM/xbol/12.0.0/bin/CEMLIPerfTool[2112]: do_logging[76]: /autofs/upgrade/pmp/sac/cemli/perftool_runs.log: cannot create [Permission denied]
+Info: end of processing Logging done
+
+
+
+
++---------------------------------------------------------------------------+
+Executing request completion options...
+
+Output file size: 
+0
+
++------------- 1) PRINT   -------------+
+Disabling requested Output Post Processing.  Nothing to process.  The output of the request is zero byte.
++--------------------------------------+
+
+
+Finished executing request completion options.
+
++---------------------------------------------------------------------------+
+Concurrent request completed successfully
+Current system time is 09-MAY-2013 10:22:38
+
++---------------------------------------------------------------------------+

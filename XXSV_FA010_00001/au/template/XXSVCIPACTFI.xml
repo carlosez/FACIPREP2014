@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="WINDOWS-1252" ?>
+<dataTemplate name="XXSVCIPACTFI" description="XX SV Reporte CIP Activo Fijo" Version="1.0">
+<parameters>
+  <parameter name="P_BOOK_TYPE_CODE" dataType="character" />
+  <parameter name="P_DATE_END" dataType="date" />
+  <parameter name="P_ASSET_NUM" dataType="character" />
+  <parameter name="P_LEDGER_ID" dataType="number" />
+</parameters>
+
+<dataQuery>
+<sqlStatement name="REPORT_DATA">
+<![CDATA[
+SELECT B.BOOK_TYPE_CODE                                                         BOOK_TYPE_CODE,
+       (SELECT distinct CC.SEGMENT9
+          FROM FA.FA_ASSET_INVOICES AI, GL.GL_CODE_COMBINATIONS CC
+         WHERE AI.PAYABLES_CODE_COMBINATION_ID = CC.CODE_COMBINATION_ID
+           AND AI.ASSET_ID = A.ASSET_ID
+           AND AI.ASSET_INVOICE_ID in
+               (SELECT MIN(ASSET_INVOICE_ID)
+                  FROM FA.FA_ASSET_INVOICES AI2
+                 WHERE AI2.ASSET_ID = A.ASSET_ID))                              SEGMENT9,
+       (SELECT FVT.DESCRIPTION
+          FROM FND_FLEX_VALUES     FV,
+               FND_FLEX_VALUE_SETS FVS,
+               FND_FLEX_VALUES_TL  FVT
+         WHERE FV.FLEX_VALUE_SET_ID = FVS.FLEX_VALUE_SET_ID
+           AND FV.FLEX_VALUE_ID = FVT.FLEX_VALUE_ID
+           AND FVS.FLEX_VALUE_SET_NAME = 'XX_GL_MIC_PROJECT_VS'
+           AND FVT.LANGUAGE = 'US'
+           AND FV.FLEX_vALUE in
+               (SELECT CC.SEGMENT9
+                  FROM FA.FA_ASSET_INVOICES AI, GL.GL_CODE_COMBINATIONS CC
+                 WHERE AI.PAYABLES_CODE_COMBINATION_ID =
+                       CC.CODE_COMBINATION_ID
+                   AND AI.ASSET_ID = A.ASSET_ID
+                   AND AI.ASSET_INVOICE_ID in
+                       (SELECT MIN(ASSET_INVOICE_ID)
+                          FROM FA.FA_ASSET_INVOICES AI2
+                         WHERE AI2.ASSET_ID = A.ASSET_ID)))                     DESCRIPTION,
+       AK.SEGMENT1 || '-' || AK.SEGMENT2                                        PROYECTO_FA,
+       A.ASSET_TYPE                                                             ASSET_TYPE,
+       A.ASSET_NUMBER                                                           ASSET_NUMBER,
+      date_placed_in_service                                                    Fecha_puesta_servicio,
+       A.SERIAL_NUMBER                                                          SERIAL_NUMBER,
+       A.MODEL_NUMBER                                                           MODEL_NUMBER,
+       CT.SEGMENT1 || '-' || CT.SEGMENT2                                        FA_CATEGORY,
+       A.DESCRIPTION                                                            DESCRIpcion_articulo,
+       (SELECT MAX(PO_NUMBER)
+          FROM FA.FA_MASS_ADDITIONS MA
+         WHERE MA.ASSET_NUMBER = A.ASSET_NUMBER)                                PO_NUMBER,
+       B.COST                                                                   COSTO,
+       LC.SEGMENT1 || '-' || LC.SEGMENT2 || '-' || LC.SEGMENT3 || '-' ||
+       LC.SEGMENT4 || '-' || LC.SEGMENT5 || '-' || LC.SEGMENT6                  LOCATION_CODE,
+       FVT1.DESCRIPTION                                                         LOCATION_DESCRIPTION,
+       (SELECT DP.PERIOD_NAME
+          FROM FA.FA_ADJUSTMENTS ADJ, FA.FA_DEPRN_PERIODS DP
+         WHERE SOURCE_TYPE_CODE = 'CIP ADDITION'
+           AND ADJUSTMENT_TYPE = 'CIP COST'
+           AND ADJ.BOOK_TYPE_CODE = B.BOOK_TYPE_CODE
+           AND ASSET_ID = A.ASSET_ID
+           AND ADJ.PERIOD_COUNTER_ADJUSTED = DP.PERIOD_COUNTER
+           AND ADJ.BOOK_TYPE_CODE = DP.BOOK_TYPE_CODE)                          PERIODO_ADICION
+  FROM APPS.FA_ADDITIONS A,
+       FA.FA_ASSET_KEYWORDS AK,
+       FA.FA_BOOKS B,
+       FA.FA_TRANSACTION_HEADERS TH,
+       APPS.FA_CATEGORIES CT,
+       APPS.FA_LOCATIONS LC,
+       APPS.FA_DISTRIBUTION_HISTORY DH,
+       APPS.FND_FLEX_VALUE_SETS FVS1,
+       APPS.FND_FLEX_VALUES FV1,
+       APPS.FND_FLEX_VALUES_TL FVT1
+ WHERE     A.ASSET_ID = B.ASSET_ID
+       AND A.ASSET_KEY_CCID = AK.CODE_COMBINATION_ID
+       --   AND A.ASSET_TYPE = 'CIP'
+       AND A.ASSET_CATEGORY_ID = CT.CATEGORY_ID
+       AND B.BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE
+       AND B.BOOK_TYPE_CODE = TH.BOOK_TYPE_CODE
+       and a.ASSET_NUMBER = nvl(:P_ASSET_NUM,a.ASSET_NUMBER) -- '378300'
+       AND A.ASSET_ID = TH.ASSET_ID
+       AND B.TRANSACTION_HEADER_ID_IN = TH.TRANSACTION_HEADER_ID
+       AND TH.TRANSACTION_HEADER_ID IN
+              (SELECT MAX (TH2.TRANSACTION_HEADER_ID)
+                 FROM FA.FA_TRANSACTION_HEADERS TH2
+                WHERE TH2.ASSET_ID = A.ASSET_ID
+                      AND B.BOOK_TYPE_CODE = TH2.BOOK_TYPE_CODE
+                      AND TRUNC(TH2.TRANSACTION_DATE_ENTERED) < :P_DATE_END
+                      AND TH2.TRANSACTION_TYPE_CODE IN
+                             ('CIP ADDITION',
+                              'CIP ADJUSTMENT',
+                              'FULL RETIREMENT'))
+       AND NOT EXISTS
+                  (SELECT '1'
+                     FROM FA.FA_TRANSACTION_HEADERS TH2,
+                          FA.FA_ADJUSTMENTS ADJ
+                    WHERE     TH2.ASSET_ID = A.ASSET_ID
+                          AND B.BOOK_TYPE_CODE = TH2.BOOK_TYPE_CODE
+                          AND TH2.BOOK_TYPE_CODE = ADJ.BOOK_TYPE_CODE
+                          AND TH2.TRANSACTION_HEADER_ID =
+                                 ADJ.TRANSACTION_HEADER_ID
+                          AND TH2.ASSET_ID = ADJ.ASSET_ID
+                          AND TRUNC(  TH2.TRANSACTION_DATE_ENTERED) < :P_DATE_END
+                          AND ADJ.SOURCE_TYPE_CODE = 'ADDITION'
+                          AND ADJUSTMENT_TYPE = 'CIP COST')
+       AND FVS1.FLEX_VALUE_SET_NAME = 'XX_FA_MIC_SITE_VS'
+       AND FVS1.FLEX_VALUE_SET_ID = FV1.FLEX_VALUE_SET_ID
+       AND FV1.FLEX_VALUE = LC.SEGMENT5
+       AND FV1.FLEX_VALUE_ID = FVT1.FLEX_VALUE_ID
+       AND FVT1.LANGUAGE = 'US'
+       AND FV1.PARENT_FLEX_VALUE_LOW = 'SV'
+       AND A.ASSET_ID = DH.ASSET_ID
+       AND DH.BOOK_TYPE_CODE = B.BOOK_TYPE_CODE
+       AND dh.distribution_id =
+              (SELECT MAX (distribution_id)
+                 FROM FA.FA_DISTRIBUTION_HISTORY DH2
+                WHERE DH2.ASSET_ID = A.ASSET_ID
+                      AND DH2.BOOK_TYPE_CODE = B.BOOK_TYPE_CODE)
+       AND DH.DATE_INEFFECTIVE IS NULL
+       AND lc.location_id = dh.location_id
+]]>
+</sqlStatement>
+<sqlStatement name="COMPANY_INFO">
+ <![CDATA[ 
+select         FVTp.description COMPANY
+		, :P_BOOK_TYPE_CODE  BOOK_TYPE_CODE  
+		, :P_DATE_END DATE_END 
+		, :P_ASSET_NUM ASSET_NUMBER
+from
+       FND_FLEX_VALUE_SETS FVSp
+       ,FND_FLEX_VALUES FVp
+       ,FND_FLEX_VALUES_TL FVTp
+       ,gl.GL_CODE_COMBINATIONS ccp
+       ,gl.gl_ledgers ldp
+where 
+    FVSp.FLEX_VALUE_SET_NAME = 'XX_GL_MIC_COMPANY_VS'
+       AND FVSp.FLEX_VALUE_SET_ID = FVp.FLEX_VALUE_SET_ID
+       AND FVp.FLEX_VALUE = ccp.SEGMENT1
+       AND FVp.FLEX_VALUE_ID = FVTp.FLEX_VALUE_ID
+       AND FVTp.LANGUAGE = 'US'
+        AND ldp.RET_EARN_CODE_COMBINATION_ID = ccp.CODE_COMBINATION_ID     
+       and ldp.ledger_id = :P_LEDGER_ID
+]]>
+</sqlStatement>
+</dataQuery>
+<dataStructure>
+<group name="REPORT_DATA" source="REPORT_DATA">
+	  <element name="BOOK_TYPE_CODE" value="BOOK_TYPE_CODE" /> 
+	  <element name="SEGMENT9" value="SEGMENT9" /> 
+	  <element name="DESCRIPTION" value="DESCRIPTION" /> 
+	  <element name="PROYECTO_FA" value="PROYECTO_FA" />
+	  <element name="ASSET_TYPE" value="ASSET_TYPE" />
+	  <element name="ASSET_NUMBER" value="ASSET_NUMBER" />  
+	  <element name="FECHA_PUESTA_SERVICIO" value="FECHA_PUESTA_SERVICIO" />   
+	  <element name="SERIAL_NUMBER" value="SERIAL_NUMBER" />
+	  <element name="MODEL_NUMBER" value="MODEL_NUMBER" /> 
+	  <element name="FA_CATEGORY" value="FA_CATEGORY" /> 
+	  <element name="DESCRIPCION_ARTICULO" value="DESCRIPCION_ARTICULO" /> 
+	  <element name="PO_NUMBER" value="PO_NUMBER" />
+	  <element name="COSTO" value="COSTO" />
+	  <element name="LOCATION_CODE" value="LOCATION_CODE" />  
+	  <element name="LOCATION_DESCRIPTION" value="LOCATION_DESCRIPTION" />   
+	  <element name="PERIODO_ADICION" value="PERIODO_ADICION" />
+</group>
+<group name="COMPANY_INFO" source="COMPANY_INFO">
+	  <element name="COMPANY" value="COMPANY" /> 
+	  <element name="BOOK_TYPE_CODE" value="BOOK_TYPE_CODE" /> 
+	  <element name="DATE_END" value="DATE_END" /> 
+	  <element name="ASSET_NUMBER" value="ASSET_NUMBER" />
+</group>
+</dataStructure>
+</dataTemplate>

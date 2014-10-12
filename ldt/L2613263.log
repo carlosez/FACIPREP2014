@@ -1,0 +1,31 @@
++---------------------------------------------------------------------------+
+Application Object Library: Version : 12.0.0
+
+Copyright (c) 1979, 1999, Oracle Corporation. All rights reserved.
+
+ module: 
++---------------------------------------------------------------------------+
+
+Current system time is 26-MAY-2014 15:52:49
+
++---------------------------------------------------------------------------+
+
+Uploading from the data file C_XXSVFACIPADD.ldt
+Altering database NLS_LANGUAGE environment to AMERICAN
+Dump from LCT/LDT files (/dmilii/applmgr/1200/fnd/12.0.0/patch/115/import/afcpprog.lct(120.2.12010000.2), C_XXSVFACIPADD.ldt) to stage tables
+Dump LCT file /dmilii/applmgr/1200/fnd/12.0.0/patch/115/import/afcpprog.lct(120.2.12010000.2) into FND_SEED_STAGE_CONFIG
+Dump LDT file C_XXSVFACIPADD.ldt into FND_SEED_STAGE_ENTITY
+FLOAD-MISSING PREPARE
+FLOAD-MISSING PREPARE
+FLOAD-MISSING PREPARE
+FLOAD-MISSING PREPARE
+FLOAD-MISSING PREPARE
+FLOAD-MISSING PREPARE
+Dumped the batch (EXECUTABLE XDODTEXE XDO , PROGRAM XXSVFACIPADD XBOL ) into FND_SEED_STAGE_ENTITY
+Upload from stage tables
+
++---------------------------------------------------------------------------+
+Concurrent request completed successfully
+Current system time is 26-MAY-2014 15:52:52
+
++---------------------------------------------------------------------------+
