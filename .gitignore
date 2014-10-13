@@ -7,6 +7,12 @@ profile
 *.xlsx
 *.xls
 
+# Development and Testing
+o*.xls
+o*.xml
+o*
+O*
+
 # xcode noise
 build/*
 *.mode1
