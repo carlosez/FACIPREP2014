@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="WINDOWS-1252" ?>
-<dataTemplate name="XXSV_CIP_REPORT" description="Reporte Movimientos CIP" Version="1.0">
+<dataTemplate name="XXSVFACIPADD" description="Reporte CIP Additions SV" Version="1.0">
 <parameters>
   <parameter name="P_LIBRO_CONTABLE" dataType="character" />
   <parameter name="P_PROYECTO" dataType="character" />
@@ -139,7 +139,7 @@ SELECT B.BOOK_TYPE_CODE,
    <dataStructure>  
    		        <group name="XXSV_CIP_REPORT" source="Q1">
 						<element name="BOOK_TYPE_CODE" value="BOOK_TYPE_CODE" />
-				  < element name="SEGMENT9" value="SEGMENT9" />
+				    <element name="SEGMENT9" value="SEGMENT9" />
 						<element name="DESCRIPTION" value="DESCRIPTION" />
 						<element name="PROYECTO_FA" value="PROYECTO_FA" />
 						<element name="ASSET_TYPE" value="ASSET_TYPE" />
