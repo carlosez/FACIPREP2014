@@ -59,7 +59,7 @@ select a.asset_number codigo,
                        AND DD.DEPRN_SOURCE_CODE != 'B'
                        AND DP.PERIOD_COUNTER <= (SELECT DP2.PERIOD_COUNTER 
                                                    FROM FA.FA_DEPRN_PERIODS DP2 
-                                                  WHERE DP2.PERIOD_NAME = :P_PERIODO
+                                                  WHERE DP2.PERIOD_NAME = :P_PERIOD
                                                     AND DP2.BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE)) DEPRECIACION_ACUMULADA,
        (select SUM(YTD_DEPRN)
           FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
@@ -67,14 +67,14 @@ select a.asset_number codigo,
            AND DD.ASSET_ID = B.ASSET_ID
            AND DD.BOOK_TYPE_CODE = b.book_type_code
            AND DP.PERIOD_COUNTER = DD.PERIOD_COUNTER
-           AND DP.PERIOD_NAME = :P_PERIODO) DEPRECIACION_YTD,
+           AND DP.PERIOD_NAME = :P_PERIOD) DEPRECIACION_YTD,
        (select SUM(DEPRN_AMOUNT)
           FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
          WHERE DP.BOOK_TYPE_CODE = DD.BOOK_TYPE_CODE
            AND DD.BOOK_TYPE_CODE = b.book_type_code
            AND DD.ASSET_ID = B.ASSET_ID
            AND DP.PERIOD_COUNTER = DD.PERIOD_COUNTER
-           AND DP.PERIOD_NAME = :P_PERIODO) DEPRECIACION_MES,
+           AND DP.PERIOD_NAME = :P_PERIOD) DEPRECIACION_MES,
        b.cost - nvl((select MAX(DEPRN_RESERVE)
                       FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
                      WHERE DP.BOOK_TYPE_CODE = DD.BOOK_TYPE_CODE
@@ -84,7 +84,7 @@ select a.asset_number codigo,
                        AND DD.DEPRN_SOURCE_CODE != 'B'
                        AND DP.PERIOD_COUNTER <= (SELECT DP2.PERIOD_COUNTER 
                                                    FROM FA.FA_DEPRN_PERIODS DP2 
-                                                  WHERE DP2.PERIOD_NAME = :P_PERIODO 
+                                                  WHERE DP2.PERIOD_NAME = :P_PERIOD
                                                     AND DP2.BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE)),
                     0) VALOR_NETO,
        l.segment1 || '-' || l.segment2 || '-' || l.segment3 || '-' ||
