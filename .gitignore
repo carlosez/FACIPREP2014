@@ -10,8 +10,8 @@ profile
 # Development and Testing
 o*.xls
 o*.xml
-o*
-O*
+o*.xlsx
+
 
 # xcode noise
 build/*
