@@ -4,6 +4,8 @@
   <parameter name="P_BOOK_TYPE_CODE" dataType="character" />
   <parameter name="P_PERIOD" dataType="character" />
   <parameter name="P_LEDGER_ID" dataType="character" />
+  <parameter name="P_PROYECTO" dataType="character" />
+  <parameter name="P_ASSET_NUMBER" dataType="character" />
  </parameters>
 <dataQuery>
 <sqlStatement name="Q1">
@@ -163,13 +165,15 @@ select a.asset_number codigo,
        GL.GL_CODE_COMBINATIONS CC
 where a.asset_id = b.asset_id
    AND A.ASSET_CATEGORY_ID = CB.CATEGORY_ID
+   and ak.segment1 || '-' ||ak.segment2 = nvl(:P_PROYECTO, ak.segment1 || '-' ||ak.segment2) 
+   and a.asset_number = nvl(:P_ASSET_NUMBER,a.asset_number ) /* 22955454 */
    AND B.COST != 0
    AND CB.BOOK_TYPE_CODE = b.book_type_code
    and l.location_id =
        (select min(location_id)
          from fa.fa_distribution_history dh
          where dh.asset_id = b.asset_id
-           and dh.book_type_code = :P_BOOK_TYPE_CODE--b.book_type_code
+           and dh.book_type_code = :P_BOOK_TYPE_CODE/*b.book_type_code*/
            and dh.transaction_header_id_out is null)
    and b.transaction_header_id_out is null
    and b.book_type_code = :P_BOOK_TYPE_CODE
@@ -178,12 +182,13 @@ where a.asset_id = b.asset_id
 ]]>
 </sqlStatement>
 
-<sqlStatement name="LEGAL">
+<sqlStatement name="Q2">
 <![CDATA[
-SELECT INITCAP (LEGAL_ENTITY_NAME) LEGAL_ENTITY,
        :P_BOOK_TYPE_CODE Book,
        :P_PERIOD period,
-       --:P_PROYECTO PROJECT,
+       :P_PROYECTO PROJECT,
+        BOLINF.XXSV_FA_REPORTS.PROJECT_DESC( :P_PROYECTO) PROJECT_DESC,
+       :P_ASSET_NUMBER CODIGO_ACTIVO,
        TO_CHAR (SYSDATE, 'DD/MON/YYYY HH24:MI:SS') FECHA_EJECUCION
   FROM XLE_LE_OU_LEDGER_V, fa_book_controls
  WHERE BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE AND ledger_id = set_of_books_id
@@ -223,10 +228,12 @@ SELECT INITCAP (LEGAL_ENTITY_NAME) LEGAL_ENTITY,
         <element name="DESCRIPTION_PROJECT" value="DESCRIPTION_PROJECT" />
 		</group>  
 
-<group name="LEGAL" source="LEGAL">
-  <element name="LEGAL_ENTITY" value="LEGAL_ENTITY" />
-  <element name="BOOK" value="BOOK" /> 
-  <element name="PERIOD" value="PERIOD" /> 
+<group name="LEGAL" source="Q2">
+  <element name="COMPANY" value="LEGAL_ENTITY" />
+  <element name="FA_BOOK" value="BOOK" /> 
+  <element name="PROJECT" value="PROJECT" /> 
+  <element name="PROJECT_DESC" value="PROJECT_DESC" /> 
+  <element name="CODIGO_ACTIVO" value="CODIGO_ACTIVO" /> 
   <element name="FECHA_EJECUCION" value="FECHA_EJECUCION" />
 </group>
 
