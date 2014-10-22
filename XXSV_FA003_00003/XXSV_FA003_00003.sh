@@ -193,73 +193,57 @@ cd au/template
  #DATA DEFINITION
  
 echo '+----------------------------------------------------------+'
-echo '| Carga de Data Definition    							 |'
+echo '| Carga de Data Definition                                 |'
 echo '+----------------------------------------------------------+'
 echo ' '
 
 echo '------------------------------------------------------------'
 echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REP_XML -> XX_FA_SV_FIXED_ASSET_REP_XML.xml'
 
-
-XMLPubTemplateExpUpload.sh $APPS_PASS \
-   DATA_TEMPLATE \
-    XBOL \
-   	XX_FA_SV_FIXED_ASSET_REP_XML\
-	00\
-    00 \
-    XML-DATA-TEMPLATE \
-    XX_FA_SV_FIXED_ASSET_REP_XML.xml
-	
-echo '------------------------------------------------------------'
-echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REP_XML.xml'
-
-
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
-   DATA_TEMPLATE \
-    XBOL \
-   	XX_FA_SV_FIXED_ASSET_REPORT \
-	00\
-    00 \
-    XML-DATA-TEMPLATE \
-    XX_FA_SV_FIXED_ASSET_REP_XML.xml
-
+XMLPubTemplateExpUpload.sh $APPS_PASS DATA_TEMPLATE XBOL XX_FA_SV_FIXED_ASSET_REP_XML 00 00 XML-DATA-TEMPLATE XX_FA_SV_FIXED_ASSET_REP_XML.xml
 
 echo '------------------------------------------------------------'
 echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REP_XML.xml'
 
+XMLPubTemplateExpUpload.sh $APPS_PASS \
+   DATA_TEMPLATE \
+    XBOL \
+    XX_FA_SV_FIXED_ASSET_REPORT \
+    00\
+    00 \
+    XML-DATA-TEMPLATE \
+    XX_FA_SV_FIXED_ASSET_REP_XML.xml
 
+echo '------------------------------------------------------------'
+echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REP_XML.xml'
 
 XMLPubTemplateExpUpload.sh $APPS_PASS \
    DATA_TEMPLATE \
     XBOL \
-   	XXSVFACIPADD\
-	00\
+    XXSVFACIPADD \
+    00\
     00 \
     XML-DATA-TEMPLATE \
     XXSVFACIPADD.xml
-
 
 echo '------------------------------------------------------------'
 echo 'DATA_TEMPLATE XXSVFAREPCIPADDTXT ->  XXSVFACIPADD.xml'
 
-
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
+XMLPubTemplateExpUpload.sh $APPS_PASS \
    DATA_TEMPLATE \
     XBOL \
-   	XXSVFAREPCIPADDTXT \
-	00\
+    XXSVFAREPCIPADDTXT \
+    00\
     00 \
     XML-DATA-TEMPLATE \
     XXSVFACIPADD.xml
 
-
 echo '+----------------------------------------------------------+'
-echo '| Carga de Template rtf 									 |'
+echo '| Carga de Template rtf                                    |'
 echo '+----------------------------------------------------------+'
 
 echo '------------------------------------------------------------'
 echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVFACIPADD.rtf'
-
 
 XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
@@ -268,13 +252,12 @@ XMLPubTemplateExpUpload.sh $APPS_PASS \
     en \
     00 \
     RTF \
-    XXSVFACIPADD.rtf	
+    XXSVFACIPADD.rtf
 
 echo '------------------------------------------------------------'
 echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVFAREPCIPADDTXT.rtf'
 
-	
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
+XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
     XBOL \
     XXSVFAREPCIPADDTXT \
@@ -286,8 +269,7 @@ echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVFAREPCIPADDTXT.rtf'
 echo '------------------------------------------------------------'
 echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REP_XML ->  XX_FA_SV_FIXED_ASSET_REP_XML.rtf'
 
-
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
+XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
     XBOL \
     XX_FA_SV_FIXED_ASSET_REP_XML \
@@ -295,12 +277,11 @@ echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REP_XML ->  XX_FA_SV_FIXED_ASSET_REP_
     00 \
     RTF \
     XX_FA_SV_FIXED_ASSET_REP_XML.rtf
-	
+    
 echo '------------------------------------------------------------'
 echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REPORT.rtf'
 
-	
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
+XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
     XBOL \
     XX_FA_SV_FIXED_ASSET_REPORT \
