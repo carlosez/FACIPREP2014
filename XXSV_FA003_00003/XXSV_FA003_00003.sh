@@ -198,7 +198,35 @@ echo '+----------------------------------------------------------+'
 echo ' '
 
 echo '------------------------------------------------------------'
-echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REP_XML -> XX_FA_SV_FIXED_ASSET_REP_XML.xml'
+echo 'DATA_TEMPLATE XXSVFACIPADD ->  XXSVCIPDT.xml'
+
+
+XMLPubTemplateExpUpload.sh $APPS_PASS \
+   DATA_TEMPLATE \
+    XBOL \
+   	XXSVFACIPADD\
+	00\
+    00 \
+    XML-DATA-TEMPLATE \
+    XXSVCIPDT.xml
+
+
+echo '------------------------------------------------------------'
+echo 'DATA_TEMPLATE XXSVFAREPCIPADDTXT ->  XXSVCIPDT.xml'
+
+
+	XMLPubTemplateExpUpload.sh $APPS_PASS \
+   DATA_TEMPLATE \
+    XBOL \
+   	XXSVFAREPCIPADDTXT \
+	00\
+    00 \
+    XML-DATA-TEMPLATE \
+    XXSVCIPDT.xml
+
+
+echo '------------------------------------------------------------'
+echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REP_XML -> XXSVCIPDT.xml'
 
 
 XMLPubTemplateExpUpload.sh $APPS_PASS \
@@ -208,7 +236,7 @@ XMLPubTemplateExpUpload.sh $APPS_PASS \
 	00\
     00 \
     XML-DATA-TEMPLATE \
-    XX_FA_SV_FIXED_ASSET_REP_XML.xml
+    XXSVAUXDT.xml
 	
 echo '------------------------------------------------------------'
 echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REP_XML.xml'
@@ -221,36 +249,9 @@ echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REP_XML
 	00\
     00 \
     XML-DATA-TEMPLATE \
-    XX_FA_SV_FIXED_ASSET_REP_XML.xml
+    XXSVAUXDT.xml
 
 
-echo '------------------------------------------------------------'
-echo 'DATA_TEMPLATE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REP_XML.xml'
-
-
-
-XMLPubTemplateExpUpload.sh $APPS_PASS \
-   DATA_TEMPLATE \
-    XBOL \
-   	XXSVFACIPADD\
-	00\
-    00 \
-    XML-DATA-TEMPLATE \
-    XXSVFACIPADD.xml
-
-
-echo '------------------------------------------------------------'
-echo 'DATA_TEMPLATE XXSVFAREPCIPADDTXT ->  XXSVFACIPADD.xml'
-
-
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
-   DATA_TEMPLATE \
-    XBOL \
-   	XXSVFAREPCIPADDTXT \
-	00\
-    00 \
-    XML-DATA-TEMPLATE \
-    XXSVFACIPADD.xml
 
 
 echo '+----------------------------------------------------------+'
@@ -258,7 +259,7 @@ echo '| Carga de Template rtf 									 |'
 echo '+----------------------------------------------------------+'
 
 echo '------------------------------------------------------------'
-echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVFACIPADD.rtf'
+echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVCIPXML.rtf'
 
 
 XMLPubTemplateExpUpload.sh $APPS_PASS \
@@ -268,10 +269,10 @@ XMLPubTemplateExpUpload.sh $APPS_PASS \
     en \
     00 \
     RTF \
-    XXSVFACIPADD.rtf	
+    XXSVCIPXML.rtf
 
 echo '------------------------------------------------------------'
-echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVFAREPCIPADDTXT.rtf'
+echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVCIPTXT.rtf'
 
 	
 	XMLPubTemplateExpUpload.sh $APPS_PASS \
@@ -281,10 +282,10 @@ echo 'TEMPLATE_SOURCE XXSVFAREPCIPADDTXT ->  XXSVFAREPCIPADDTXT.rtf'
     en \
     00 \
     RTF-ETEXT \
-    XXSVFAREPCIPADDTXT.rtf
+    XXSVCIPTXT.rtf
 
 echo '------------------------------------------------------------'
-echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REP_XML ->  XX_FA_SV_FIXED_ASSET_REP_XML.rtf'
+echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REP_XML ->  XXSVAUXXML.rtf'
 
 
 	XMLPubTemplateExpUpload.sh $APPS_PASS \
@@ -294,10 +295,10 @@ echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REP_XML ->  XX_FA_SV_FIXED_ASSET_REP_
     en \
     00 \
     RTF \
-    XX_FA_SV_FIXED_ASSET_REP_XML.rtf
+    XXSVAUXXML.rtf
 	
 echo '------------------------------------------------------------'
-echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REPORT.rtf'
+echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REPORT ->  XXSVAUXTXT.rtf'
 
 	
 	XMLPubTemplateExpUpload.sh $APPS_PASS \
@@ -307,7 +308,7 @@ echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REPORT ->  XX_FA_SV_FIXED_ASSET_REPOR
     en \
     00 \
     RTF-ETEXT \
-    XX_FA_SV_FIXED_ASSET_REPORT.rtf
+    XXSVAUXTXT.rtf
 
     
 cd ..
