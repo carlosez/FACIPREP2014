@@ -7,7 +7,7 @@
 #|     XXXBOL_INV01_00001_ALL.sh                                            |
 #|                                                                          |
 #| DESCRIPTION                                                              |
-#|    Shell Script para Proyecto TIGO                                       |
+#|    Shell Script para Proyecto AVIANCA                                       |
 #|                                                                          |
 #| SOURCE CONTROL                                                           |
 #|    Version: %I%                                                          |

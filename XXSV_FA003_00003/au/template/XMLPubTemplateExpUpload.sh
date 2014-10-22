@@ -7,14 +7,14 @@
 #|     XMLPubTemplateExpUpload.sh                                           |
 #|                                                                          |
 #| DESCRIPTION                                                              |
-#|    Shell Script para la instalacion de Templates - Proyecto TIGO         |
+#|    Shell Script para la instalacion de Templates - Proyecto AVIANCA      |
 #|                                                                          |
 #| SOURCE CONTROL                                                           |
 #|    Version: %I%                                                          |
 #|    Fecha  : %E% %U%                                                      |
 #|                                                                          |
 #| HISTORY                                                                  |
-#|    06-Sep-2012  E.Monsalve     Created   Oratechla                       |
+#|    06-Sep-2012  E.Esquivel     Created   Oratechla                       |
 #+==========================================================================*/
 #!/usr/bin/ksh
 
