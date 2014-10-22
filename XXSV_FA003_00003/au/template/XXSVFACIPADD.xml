@@ -78,7 +78,7 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
                          FROM fa_asset_invoices ai2
                         WHERE ai2.asset_id = a.asset_id))
           CLEARING_ACCOUNT,
-        date_placed_in_service DATE_PLACED_IN_SERVICE,
+        date_placed_in_service Fecha_puesta_servicio,
        B.life_in_months,
        B.cost,
         lc.segment1
