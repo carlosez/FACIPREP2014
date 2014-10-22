@@ -67,3 +67,5 @@ end;
 
 end  XXSV_FA_REPORTS;
 /
+exit
+/

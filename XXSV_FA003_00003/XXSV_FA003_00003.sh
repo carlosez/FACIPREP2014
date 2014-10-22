@@ -1,5 +1,4 @@
-﻿#
-#/*=========================================================================+
+﻿#/*=========================================================================+
 #|  Copyright (c) 2014 Entrustca, San Salvador, El Salvador                 |
 #|                         ALL rights reserved.                             |
 #+==========================================================================+
@@ -16,6 +15,7 @@
 #|                                                                          |
 #| HISTORY                                                                  |
 #|    13-06-2014  jonathan Ulloa   Created   Entrustca                      |
+#|    22-10-2014  Carlos Torres    Modify    Entrustca                      |
 #+==========================================================================*/
 
 echo ''
@@ -101,35 +101,32 @@ echo 'Copying objects SQL to $XBOL_TOP'
 # Copia de los Imports
 echo 'Copying objects LDT to $XBOL_TOP'
 
-#copy_file xbol/admin/import $XBOL_TOP/admin/import XX_AR_REPCAJ_RES.ldt
-#copy_file xbol/admin/import $XBOL_TOP/admin/import Receivables_All.ldt
-#copy_file xbol/admin/import $XBOL_TOP/admin/import XX_AR_REPCAJ_RES_TMPL.ldt
-#copia los  rdfs
+echo '------------------------------------------------------------'
+echo 'Disable previous Templates disable_old_templates_apps.sql'
 
-#copy_file au/reports $XBOL_TOP/reports/ESA  XX_AP002F930.rdf
+sqlplus apps/$APPS_PASS @xbol/sql/disable_old_templates_apps.sql
 
-# Compilacion de Scripts
-#echo 'Compiling Scripts'
-#sqlplus bolinf/$BOLINF_PASS @xbol/sql/XX_AH_GET_CCID_USES.sql
 
 echo '------------------------------------------------------------'
 echo 'Compiling XXSV_FA_REPORTS.pks'
+
 sqlplus bolinf/$BOLINF_PASS @xbol/sql/XXSV_FA_REPORTS.pks
+
 echo '------------------------------------------------------------'
 echo ' XXSV_FA_REPORTS.pkb'
+
 sqlplus bolinf/$BOLINF_PASS @xbol/sql/XXSV_FA_REPORTS.pkb
+
 echo '------------------------------------------------------------'
 echo 'grant_bolinf.sql'
+
 sqlplus bolinf/$BOLINF_PASS @xbol/sql/grant_bolinf.sql
+
 echo '------------------------------------------------------------'
 echo ' synonym_apps.sql'
+
 sqlplus apps/$APPS_PASS @xbol/sql/synonym_apps.sql
 
-
-#sqlplus bolinf/$BOLINF_PASS @xbol/sql/grants.sql
-# En apps
-#sqlplus apps/$APPS_PASS @xbol/sql/indexs.sql
-#sqlplus apps/$APPS_PASS @xbol/sql/synonyms.sql
 
 
 # Carga Concurrentes.
@@ -137,39 +134,83 @@ echo '------------------------------------------------------------'
 echo 'Carga de Concurrentes'
 echo 'C_XX_FA_SV_FIXED_ASSET_REP_XML.ldt'
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct xbol/admin/import/C_XX_FA_SV_FIXED_ASSET_REP_XML.ldt CUSTOM_MODE="FORCE"
+
 echo '------------------------------------------------------------'
 echo 'C_XX_FA_SV_FIXED_ASSET_REPORT.ldt  ' 
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct xbol/admin/import/C_XX_FA_SV_FIXED_ASSET_REPORT.ldt CUSTOM_MODE="FORCE"
+
 echo '------------------------------------------------------------'
 echo 'C_XXSVFACIPADD.ldt '
+
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct xbol/admin/import/C_XXSVFACIPADD.ldt CUSTOM_MODE="FORCE"
+
 echo '------------------------------------------------------------'
 echo 'C_XXSVFAREPCIPADDTXT.ldt'
+
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct xbol/admin/import/C_XXSVFAREPCIPADDTXT.ldt CUSTOM_MODE="FORCE"
+
 
 # Carga Request Group.
 echo '------------------------------------------------------------'
 echo 'R_All_Reports_and_Programs.ldt'
+
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $FND_TOP/patch/115/import/afcpreqg.lct xbol/admin/import/R_All_Reports_and_Programs.ldt CUSTOM_MODE="FORCE"
 
 # Carga Template.
 echo '------------------------------------------------------------'
 echo 'Carga de Template'
 echo 'T_XX_FA_SV_FIXED_ASSET_REP_XML.ldt'
+
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $XDO_TOP/patch/115/import/xdotmpl.lct  xbol/admin/import/T_XX_FA_SV_FIXED_ASSET_REP_XML.ldt CUSTOM_MODE="FORCE" 
+
 echo '------------------------------------------------------------'
-echo 'T_XXSVFACIPADD.ldt '
+echo 'T_XX_FA_SV_FIXED_ASSET_REPORT.ldt '
+
+FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $XDO_TOP/patch/115/import/xdotmpl.lct  xbol/admin/import/T_XX_FA_SV_FIXED_ASSET_REPORT.ldt CUSTOM_MODE="FORCE" 
+
+echo '------------------------------------------------------------'
+echo 'Carga de Template'
+echo 'T_XXSVFACIPADD.ldt'
+
 FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $XDO_TOP/patch/115/import/xdotmpl.lct  xbol/admin/import/T_XXSVFACIPADD.ldt CUSTOM_MODE="FORCE" 
+
+echo '------------------------------------------------------------'
+echo 'T_XXSVFAREPCIPADDTXT.ldt '
+
+FNDLOAD apps/$APPS_PASS 0 Y UPLOAD $XDO_TOP/patch/115/import/xdotmpl.lct  xbol/admin/import/T_XXSVFAREPCIPADDTXT.ldt CUSTOM_MODE="FORCE" 
 
 echo ' '
 # Carga Template.
 echo 'Carga de Data Definition'
+
 #####################################################################################
 # UPLOAD TEMPLATES  XML y RTF
 #####################################################################################
+
 echo 'XMLPubTemplateExpUpload.sh '
+
 cd au/template
+
  #DATA DEFINITION
+ 
+XMLPubTemplateExpUpload.sh $APPS_PASS \
+   DATA_TEMPLATE \
+    XBOL \
+   	XX_FA_SV_FIXED_ASSET_REP_XML\
+	00\
+    00 \
+    XML-DATA-TEMPLATE \
+    XX_FA_SV_FIXED_ASSET_REP_XML.xml
+	
+	XMLPubTemplateExpUpload.sh $APPS_PASS \
+   DATA_TEMPLATE \
+    XBOL \
+   	XX_FA_SV_FIXED_ASSET_REPORT \
+	00\
+    00 \
+    XML-DATA-TEMPLATE \
+    XX_FA_SV_FIXED_ASSET_REP_XML.xml
+
 XMLPubTemplateExpUpload.sh $APPS_PASS \
    DATA_TEMPLATE \
     XBOL \
@@ -182,49 +223,52 @@ XMLPubTemplateExpUpload.sh $APPS_PASS \
 	XMLPubTemplateExpUpload.sh $APPS_PASS \
    DATA_TEMPLATE \
     XBOL \
-   	XX_FA_SV_FIXED_ASSET_REP_XML \
+   	XXSVFAREPCIPADDTXT \
 	00\
     00 \
     XML-DATA-TEMPLATE \
-    XX_FA_SV_FIXED_ASSET_REP_XML.xml
+    XXSVFACIPADD.xml
+
+
 	
 echo 'Carga de Template rtf'
 echo 'XMLPubTemplateExpUpload.sh '
+
 XMLPubTemplateExpUpload.sh $APPS_PASS \
-    TEMPLATE_SOURCE \
-    XBOL \
-    XX_FA_SV_FIXED_ASSET_REP_XML \
-    en \
-    00 \
-    RTF \
-    FIXEDASSETREPORT.rtf	
-	
-	XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
     XBOL \
     XXSVFACIPADD \
     en \
     00 \
     RTF \
-    XXSVFACIPADD2.rtf
+    XXSVFACIPADD.rtf	
+	
+	XMLPubTemplateExpUpload.sh $APPS_PASS \
+    TEMPLATE_SOURCE \
+    XBOL \
+    XXSVFAREPCIPADDTXT \
+    en \
+    00 \
+    ETEXT \
+    XXSVFAREPCIPADDTXT.rtf
 
 	XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
     XBOL \
     XX_FA_SV_FIXED_ASSET_REP_XML \
-    esa \
+    en \
     00 \
     RTF \
-    FIXEDASSETREPORT.rtf	
+    XX_FA_SV_FIXED_ASSET_REP_XML.rtf
 	
 	XMLPubTemplateExpUpload.sh $APPS_PASS \
     TEMPLATE_SOURCE \
     XBOL \
-    XXSVFACIPADD \
-    esa \
+    XX_FA_SV_FIXED_ASSET_REPORT \
+    en \
     00 \
-    RTF \
-    XXSVFACIPADD2.rtf
+    ETEXT \
+    XX_FA_SV_FIXED_ASSET_REPORT.rtf
 
     
 cd ..

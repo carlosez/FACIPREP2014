@@ -63,5 +63,7 @@ procedure ALL_ASSET( ECODE out varchar2
 
 
 
-end ;
+end;
+/
+exit
 /
