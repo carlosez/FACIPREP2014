@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="WINDOWS-1252" ?>
+<dataTemplate name="XX_FA_SV_FIXED_ASSET_REP_XML" description="XX SV Fixed Asset Report" Version="1.0">
+    <parameters>
+      <parameter name="P_LEDGER_ID" dataType="character" />
+      <parameter name="P_BOOK_TYPE_CODE" dataType="character" />
+      <parameter name="P_PERIOD" dataType="character" />
+      <parameter name="P_PROYECTO" dataType="character" />
+      <parameter name="P_ASSET_NUMBER" dataType="character" />
+     </parameters>
+  <dataQuery>
+  <sqlStatement name="Q1">
+  <![CDATA[
+SELECT a.asset_number codigo
+      ,a.attribute1 codigo_legado
+      ,a.description
+      ,a.manufacturer_name marca
+      ,a.model_number
+      ,a.serial_number
+      ,a.asset_type
+      ,a.attribute_category_code
+      , (SELECT MIN (   CC2.SEGMENT1
+                     || '.'
+                     || CC2.SEGMENT2
+                     || '.'
+                     || CC2.SEGMENT3
+                     || '.'
+                     || CC2.SEGMENT4
+                     || '.'
+                     || CC2.SEGMENT5
+                     || '.'
+                     || CC2.SEGMENT6
+                     || '.'
+                     || CC2.SEGMENT7
+                     || '.'
+                     || CC2.SEGMENT8
+                     || '.'
+                     || CC2.SEGMENT9
+                     || '.'
+                     || CC2.SEGMENT10
+                     || '.'
+                     || CC2.SEGMENT11
+                     || '.'
+                     || CC2.SEGMENT12
+                     || '.'
+                     || CC2.SEGMENT13)
+           FROM fa.FA_DISTRIBUTION_HISTORY DH, gl.gl_code_combinations cc2
+          WHERE DH.asset_id = a.asset_id
+            AND DH.BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE  /*B.BOOK_TYPE_CODE*/
+            AND DH.code_combination_id = cc2.code_combination_id
+            AND DH.DISTRIBUTION_ID = (SELECT MIN (DISTRIBUTION_ID)
+                                        FROM fa.FA_DISTRIBUTION_HISTORY DH2
+                                       WHERE DH2.asset_id = a.asset_id))
+          CUENTA_GASTO
+      , 
+       CC .SEGMENT1
+       || '.'
+       || CC.SEGMENT2
+       || '.'
+       || CC.SEGMENT3
+       || '.'
+       || CC.SEGMENT4
+       || '.'
+       || CC.SEGMENT5
+       || '.'
+       || CC.SEGMENT6
+       || '.'
+       || CC.SEGMENT7
+       || '.'
+       || CC.SEGMENT8
+       || '.'
+       || CC.SEGMENT9
+       || '.'
+       || CC.SEGMENT10
+       || '.'
+       || CC.SEGMENT11
+       || '.'
+       || CC.SEGMENT12
+       || '.'
+       || CC.SEGMENT13
+          CUENTA_ACTIVO
+      ,         /* cuenta de activo*/
+        (SELECT MIN (   CC1.SEGMENT1
+                     || '.'
+                     || CC1.SEGMENT2
+                     || '.'
+                     || CC1.SEGMENT3
+                     || '.'
+                     || CC1.SEGMENT4
+                     || '.'
+                     || CC1.SEGMENT5
+                     || '.'
+                     || CC1.SEGMENT6
+                     || '.'
+                     || CC1.SEGMENT7
+                     || '.'
+                     || CC1.SEGMENT8
+                     || '.'
+                     || CC1.SEGMENT9
+                     || '.'
+                     || CC1.SEGMENT10
+                     || '.'
+                     || CC1.SEGMENT11
+                     || '.'
+                     || CC1.SEGMENT12
+                     || '.'
+                     || CC1.SEGMENT13)
+           FROM fa.fa_asset_invoices ai, gl.gl_code_combinations cc1
+          WHERE ai.asset_id = a.asset_id
+            AND ai.payables_code_combination_id = cc1.code_combination_id
+            AND ai.invoice_transaction_id_in =
+                   (SELECT MIN (invoice_transaction_id_in)
+                      FROM fa.fa_asset_invoices ai2
+                     WHERE ai2.asset_id = a.asset_id))
+          CUENTA_CLEARING ,/* cuenta clearing */
+       b.date_placed_in_service
+      ,B.life_in_months
+      ,b.cost
+      , (SELECT MAX (DEPRN_RESERVE)
+           FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
+          WHERE DP.BOOK_TYPE_CODE = DD.BOOK_TYPE_CODE
+            AND DD.BOOK_TYPE_CODE = b.book_type_code
+            AND DD.ASSET_ID = B.ASSET_ID
+            AND DP.PERIOD_COUNTER = DD.PERIOD_COUNTER
+            AND DD.DEPRN_SOURCE_CODE != 'B'
+            AND DP.PERIOD_COUNTER <=
+                   (SELECT DP2.PERIOD_COUNTER
+                      FROM FA.FA_DEPRN_PERIODS DP2
+                     WHERE DP2.PERIOD_NAME = :P_PERIOD
+                       AND DP2.BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE))
+          DEPRECIACION_ACUMULADA
+      , (SELECT SUM (YTD_DEPRN)
+           FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
+          WHERE DP.BOOK_TYPE_CODE = DD.BOOK_TYPE_CODE
+            AND DD.ASSET_ID = B.ASSET_ID
+            AND DD.BOOK_TYPE_CODE = b.book_type_code
+            AND DP.PERIOD_COUNTER = DD.PERIOD_COUNTER
+            AND DP.PERIOD_NAME = :P_PERIOD)
+          DEPRECIACION_YTD
+      , (SELECT SUM (DEPRN_AMOUNT)
+           FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
+          WHERE DP.BOOK_TYPE_CODE = DD.BOOK_TYPE_CODE
+            AND DD.BOOK_TYPE_CODE = b.book_type_code
+            AND DD.ASSET_ID = B.ASSET_ID
+            AND DP.PERIOD_COUNTER = DD.PERIOD_COUNTER
+            AND DP.PERIOD_NAME = :P_PERIOD)
+          DEPRECIACION_MES
+      ,b.cost
+       - NVL (
+            (SELECT MAX (DEPRN_RESERVE)
+               FROM FA.FA_DEPRN_PERIODS DP, FA.FA_DEPRN_DETAIL DD
+              WHERE DP.BOOK_TYPE_CODE = DD.BOOK_TYPE_CODE
+                AND DD.BOOK_TYPE_CODE = b.book_type_code
+                AND DD.ASSET_ID = B.ASSET_ID
+                AND DP.PERIOD_COUNTER = DD.PERIOD_COUNTER
+                AND DD.DEPRN_SOURCE_CODE != 'B'
+                AND DP.PERIOD_COUNTER <=
+                       (SELECT DP2.PERIOD_COUNTER
+                          FROM FA.FA_DEPRN_PERIODS DP2
+                         WHERE DP2.PERIOD_NAME = :P_PERIOD
+                           AND DP2.BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE))
+           ,0)
+          VALOR_NETO
+      ,   l.segment1
+       || '-'
+       || l.segment2
+       || '-'
+       || l.segment3
+       || '-'
+       || l.segment4
+       || '-'
+       || l.segment5
+       || '-'
+       || l.segment6
+          LOCATION
+      , (SELECT FT1.DESCRIPTION
+           FROM FND_FLEX_VALUES FV1, FND_FLEX_VALUES_TL FT1
+          WHERE FV1.FLEX_VALUE_ID = FT1.FLEX_VALUE_ID
+            AND FV1.PARENT_FLEX_VALUE_LOW = 'SV'
+            AND ft1.language = 'ESA'
+            AND FV1.FLEX_VALUE_SET_ID = 1014903
+            AND FV1.FLEX_VALUE = L.SEGMENT5)
+          DESCRIPCION_LOCATION
+      , (SELECT P.EMPLOYEE_NUMBER
+           FROM fa.fa_distribution_history dh, PER_ALL_PEOPLE_F P
+          WHERE dh.asset_id = b.asset_id
+            AND DH.ASSIGNED_TO = P.PERSON_ID
+            AND dh.book_type_code = :P_BOOK_TYPE_CODE    /*b.book_type_code*/
+            AND dh.transaction_header_id_out IS NULL
+            AND ROWNUM = 1)
+          CODIGO_EMPLEADO_ORACLE
+      , (SELECT P.FULL_NAME
+           FROM fa.fa_distribution_history dh, PER_ALL_PEOPLE_F P
+          WHERE dh.asset_id = b.asset_id
+            AND DH.ASSIGNED_TO = P.PERSON_ID
+            AND dh.book_type_code = :P_BOOK_TYPE_CODE     /*b.book_type_code*/
+            AND dh.transaction_header_id_out IS NULL
+            AND ROWNUM = 1)
+          EMPLEADO_ORACLE
+      , (SELECT P.ATTRIBUTE1
+           FROM fa.fa_distribution_history dh, PER_ALL_PEOPLE_F P
+          WHERE dh.asset_id = b.asset_id
+            AND DH.ASSIGNED_TO = P.PERSON_ID
+            AND dh.book_type_code = :P_BOOK_TYPE_CODE      /*b.book_type_code*/
+            AND dh.transaction_header_id_out IS NULL
+            AND ROWNUM = 1)
+          EMPLEADO_LEGADO
+      , (SELECT MIN (po_number)
+           FROM fa.fa_asset_invoices ai
+          WHERE ai.asset_id = a.asset_id
+            AND ai.invoice_transaction_id_in =
+                   (SELECT MIN (invoice_transaction_id_in)
+                      FROM fa.fa_asset_invoices ai2
+                     WHERE ai2.asset_id = a.asset_id))
+          OC
+      , (SELECT MIN (invoice_number)
+           FROM fa.fa_asset_invoices ai
+          WHERE ai.asset_id = a.asset_id
+            AND ai.invoice_transaction_id_in =
+                   (SELECT MIN (invoice_transaction_id_in)
+                      FROM fa.fa_asset_invoices ai2
+                     WHERE ai2.asset_id = a.asset_id))
+          FACTURA
+      , (SELECT MIN (asu.vendor_name)
+           FROM fa.fa_asset_invoices ai, ap_suppliers asu
+          WHERE ai.asset_id = a.asset_id
+            AND ai.invoice_transaction_id_in =
+                   (SELECT MIN (invoice_transaction_id_in)
+                      FROM fa.fa_asset_invoices ai2
+                     WHERE ai2.asset_id = a.asset_id)
+            AND ai.po_vendor_id = asu.vendor_id)
+          PROVEEDOR
+      ,   ak.segment1
+       || '-'
+       || ak.segment2
+          PROYECTO
+      ,                                              /* proyecto*/
+        (SELECT    FT1.DESCRIPTION
+                || '-'
+                || FT2.DESCRIPTION
+           FROM FND_FLEX_VALUES FV1
+               ,FND_FLEX_VALUES_TL FT1
+               ,FND_FLEX_VALUES FV2
+               ,FND_FLEX_VALUES_TL FT2
+          WHERE FV1.FLEX_VALUE_ID = FT1.FLEX_VALUE_ID
+            AND FV2.FLEX_VALUE_ID = FT2.FLEX_VALUE_ID
+            AND FV2.PARENT_FLEX_VALUE_LOW = FV1.FLEX_VALUE
+            AND    FV1.FLEX_VALUE
+                || '-'
+                || FV2.FLEX_VALUE =    ak.segment1
+                                    || '-'
+                                    || ak.segment2
+            AND FV1.flex_value LIKE 'SV%'
+            AND ft1.language = 'ESA'
+            AND ft2.language = 'ESA'
+            AND FV1.FLEX_VALUE_SET_ID = 1014897
+            AND FV2.FLEX_VALUE_SET_ID = 1014898)
+          DESCRIPCION_PROYECTO          /* descripción del proyecto*/
+  FROM apps.fa_additions_v a
+      ,fa.fa_books b
+      ,fa.fa_asset_keywords ak
+      ,fa.fa_locations l
+      ,FA.FA_CATEGORY_BOOKS CB
+      ,GL.GL_CODE_COMBINATIONS CC
+ WHERE a.asset_id = b.asset_id
+   AND A.ASSET_CATEGORY_ID = CB.CATEGORY_ID
+   AND    ak.segment1
+       || '-'
+       || ak.segment2 = NVL (
+                             :P_PROYECTO
+                            ,   ak.segment1
+                             || '-'
+                             || ak.segment2
+                            )
+   AND a.asset_number = NVL (:P_ASSET_NUMBER, a.asset_number)   /* 22955454 */
+   AND B.COST != 0
+   AND CB.BOOK_TYPE_CODE = b.book_type_code
+   AND l.location_id = (SELECT MIN (location_id)
+                          FROM fa.fa_distribution_history dh
+                         WHERE dh.asset_id = b.asset_id
+                           AND dh.book_type_code = :P_BOOK_TYPE_CODE /*b.book_type_code*/
+                           AND dh.transaction_header_id_out IS NULL)
+   AND b.transaction_header_id_out IS NULL
+   AND b.book_type_code = :P_BOOK_TYPE_CODE
+   AND a.asset_key_ccid = ak.code_combination_id
+   AND CB.ASSET_COST_ACCOUNT_CCID = CC.CODE_COMBINATION_ID
+  ]]>
+  </sqlStatement>
+
+  <sqlStatement name="Q2">
+  <![CDATA[
+  select
+         :P_BOOK_TYPE_CODE Book,
+         :P_PERIOD period,
+         :P_PROYECTO PROJECT,
+          BOLINF.XXSV_FA_REPORTS.PROJECT_DESC( :P_PROYECTO) PROJECT_DESC,
+         :P_ASSET_NUMBER CODIGO_ACTIVO,
+         TO_CHAR (SYSDATE, 'DD/MON/YYYY HH24:MI:SS') FECHA_EJECUCION
+    FROM XLE_LE_OU_LEDGER_V, fa_book_controls
+   WHERE BOOK_TYPE_CODE = :P_BOOK_TYPE_CODE AND ledger_id = set_of_books_id
+  ]]>
+  </sqlStatement>
+  </dataQuery>
+
+  <dataStructure>  
+      <group name="XXSV_FA_REPORT" source="Q1">
+          <element name="CODIGO" value="CODIGO" />
+          <element name="LEGACY_CODE" value="LEGACY_CODE" />
+          <element name="DESCRIPTION" value="DESCRIPTION" />
+  		    <element name="MANUFACTURER_NAME" value="MANUFACTURER_NAME" />
+          <element name="MODEL_NUMBER" value="MODEL_NUMBER" />
+  		    <element name="SERIAL_NUMBER" value="SERIAL_NUMBER" />
+          <element name="ASSET_TYPE" value="ASSET_TYPE" />
+          <element name="ATTRIBUTE_CATEGORY_CODE" value="ATTRIBUTE_CATEGORY_CODE" />
+  		    <element name="CUENTA_GASTO " value="CUENTA_GASTO"/>
+  		    <element name="CUENTA_ACTIVO" value="CUENTA_ACTIVO"/>
+          <element name="CUENTA_CLEARING" value="CUENTA_CLEARING" />
+          <element name="DATE_PLACED_IN_SERVICE" value="DATE_PLACED_IN_SERVICE" />
+          <element name="LIFE_IN_MONTHS" value="LIFE_IN_MONTHS" />
+          <element name="COST" value="COST" />
+          <element name="DEPRECIACION_ACUMULADA" value="DEPRECIACION_ACUMULADA" />
+  		    <element name="DEPRECIACION_YTD" value="DEPRECIACION_YTD" />
+  		    <element name="DEPRECIACION_MES" value="DEPRECIACION_MES" />
+  		    <element name="VALOR_NETO" value="VALOR_NETO" />
+  		    <element name="LOCATION" value="LOCATION" />
+          <element name="LOCATION_DESCRIPTION" value="LOCATION_DESCRIPTION" />
+          <element name="CODIGO_EMPLEADO_ORACLE" value="CODIGO_EMPLEADO_ORACLE" />
+          <element name="EMPLEADO_ORACLE" value="EMPLEADO_ORACLE" />
+          <element name="EMPLEADO_LEGADO" value="EMPLEADO_LEGADO" />
+          <element name="PO_NUMBER" value="PO_NUMBER" />
+          <element name="INVOICE" value="INVOICE" />
+          <element name="SUPPLIER" value="SUPPLIER" />
+          <element name="PROYECTO" value="PROYECTO" />
+          <element name="DESCRIPTION_PROJECT" value="DESCRIPTION_PROJECT" />
+  		</group>  
+
+      <group name="LEGAL" source="Q2">
+          <element name="COMPANY" value="LEGAL_ENTITY" />
+          <element name="FA_BOOK" value="BOOK" /> 
+          <element name="PROJECT" value="PROJECT" /> 
+          <element name="PROJECT_DESC" value="PROJECT_DESC" /> 
+          <element name="CODIGO_ACTIVO" value="CODIGO_ACTIVO" /> 
+          <element name="FECHA_EJECUCION" value="FECHA_EJECUCION" />
+      </group>
+  </dataStructure>
+</dataTemplate>
