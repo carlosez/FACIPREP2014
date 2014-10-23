@@ -4,7 +4,7 @@
 #+==========================================================================+
 #|                                                                          |
 #| FILENAME                                                                 |
-#|     XXSV_FA003_00003.sh                                          |
+#|     XXSV_FA003_00003.sh                                                  |
 #|                                                                          |
 #| DESCRIPTION                                                              |
 #|    Shell Script para la instalacion de parches - Proyecto TIGO           |
