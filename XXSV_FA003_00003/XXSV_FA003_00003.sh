@@ -205,8 +205,8 @@ XMLPubTemplateExpUpload.sh $APPS_PASS DATA_TEMPLATE XBOL XX_FA_SV_FIXED_ASSET_RE
 XMLPubTemplateExpUpload.sh $APPS_PASS \
    DATA_TEMPLATE \
     XBOL \
-   	XXSVFACIPADD\
-	00\
+    XXSVFACIPADD\
+    00\
     00 \
     XML-DATA-TEMPLATE \
     XXSVCIPDT.xml
@@ -217,8 +217,8 @@ echo 'DATA_TEMPLATE XXSVFAREPCIPADDTXT ->  XXSVCIPDT.xml'
 XMLPubTemplateExpUpload.sh $APPS_PASS \
    DATA_TEMPLATE \
     XBOL \
-   	XXSVFAREPCIPADDTXT \
-	00\
+    XXSVFAREPCIPADDTXT \
+    00\
     00 \
     XML-DATA-TEMPLATE \
     XXSVCIPDT.xml
@@ -288,7 +288,7 @@ XMLPubTemplateExpUpload.sh $APPS_PASS \
     00 \
     RTF \
     XXSVAUXXML.rtf
-	
+
 echo '------------------------------------------------------------'
 echo 'TEMPLATE_SOURCE XX_FA_SV_FIXED_ASSET_REPORT ->  XXSVAUXTXT.rtf'
 

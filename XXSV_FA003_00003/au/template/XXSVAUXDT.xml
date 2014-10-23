@@ -302,7 +302,7 @@ SELECT a.asset_number codigo
   </dataQuery>
 
   <dataStructure>  
-      <group name="XXSV_FA_REPORT" source="Q1">
+          <group name="XXSV_FA_REPORT" source="Q1">
           <element name="CODIGO" value="CODIGO" />
           <element name="LEGC" value="LEGACY_CODE" />
           <element name="DESC" value="DESCRIPTION" />
