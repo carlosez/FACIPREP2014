@@ -266,7 +266,7 @@ AND (AK.SEGMENT1 || '-' || AK.SEGMENT2) = NVL(:P_PROYECTO,(AK.SEGMENT1 || '-' ||
 
 </dataQuery>
     <dataStructure>  
-   		<group name="XXSV_CIP_REPORT" source="Q1">
+        <group name="XXSV_CIP_REPORT" source="Q1">
         <element name="COMPANY" value="COMPANY" />
         <element name="ASC" value="ASSET_CODE" />
         <element name="LEGC" value="LEGACY_CODE" />
@@ -292,7 +292,7 @@ AND (AK.SEGMENT1 || '-' || AK.SEGMENT2) = NVL(:P_PROYECTO,(AK.SEGMENT1 || '-' ||
         <element name="SUPPLIER" value="SUPPLIER" />
         <element name="PROAC" value="PROYECTO_ACTIVO" />
         <element name="DESCPRO" value="DESCRIPTION_PROJECT" />
-		</group>  
+        </group>  
 
 <group name="LEGAL_INFORMATION" source="Q2">
   <element name="LEGAL_ENTITY" value="COMPANY" />

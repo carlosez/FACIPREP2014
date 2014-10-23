@@ -306,22 +306,22 @@ SELECT a.asset_number codigo
           <element name="CODIGO" value="CODIGO" />
           <element name="LEGC" value="LEGACY_CODE" />
           <element name="DESC" value="DESCRIPTION" />
-  		    <element name="MANE" value="MANUFACTURER_NAME" />
+          <element name="MANE" value="MANUFACTURER_NAME" />
           <element name="MODELNU" value="MODEL_NUMBER" />
-  		    <element name="SERIALNU" value="SERIAL_NUMBER" />
+          <element name="SERIALNU" value="SERIAL_NUMBER" />
           <element name="AST" value="ASSET_TYPE" />
           <element name="ATCC" value="ATTRIBUTE_CATEGORY_CODE" />
-  		    <element name="CUENGAS " value="CUENTA_GASTO"/>
-  		    <element name="CUENAC" value="CUENTA_ACTIVO"/>
+          <element name="CUENGAS " value="CUENTA_GASTO"/>
+          <element name="CUENAC" value="CUENTA_ACTIVO"/>
           <element name="CUENCLE" value="CUENTA_CLEARING" />
           <element name="DATESER" value="DATE_PLACED_IN_SERVICE" />
           <element name="LIFEM" value="LIFE_IN_MONTHS" />
           <element name="COST" value="COST" />
           <element name="DEPRACUM" value="DEPRECIACION_ACUMULADA" />
-  		    <element name="DEPRY" value="DEPRECIACION_YTD" />
-  		    <element name="DEPRMES" value="DEPRECIACION_MES" />
-  		    <element name="VALORN" value="VALOR_NETO" />
-  		    <element name="LOC" value="LOCATION" />
+          <element name="DEPRY" value="DEPRECIACION_YTD" />
+          <element name="DEPRMES" value="DEPRECIACION_MES" />
+          <element name="VALORN" value="VALOR_NETO" />
+          <element name="LOC" value="LOCATION" />
           <element name="LOCDESC" value="LOCATION_DESCRIPTION" />
           <element name="CODEMPO" value="CODIGO_EMPLEADO_ORACLE" />
           <element name="EMPO" value="EMPLEADO_ORACLE" />
@@ -331,7 +331,7 @@ SELECT a.asset_number codigo
           <element name="SUPPLIER" value="SUPPLIER" />
           <element name="PROYECTO" value="PROYECTO" />
           <element name="DESCPRO" value="DESCRIPTION_PROJECT" />
-  		</group>  
+          </group>  
 
       <group name="LEGAL" source="Q2">
           <element name="COMPANY" value="LEGAL_ENTITY" />
