@@ -268,30 +268,30 @@ AND (AK.SEGMENT1 || '-' || AK.SEGMENT2) = NVL(:P_PROYECTO,(AK.SEGMENT1 || '-' ||
     <dataStructure>  
    		<group name="XXSV_CIP_REPORT" source="Q1">
         <element name="COMPANY" value="COMPANY" />
-        <element name="ASSET_CODE" value="ASSET_CODE" />
-        <element name="LEGACY_CODE" value="LEGACY_CODE" />
-        <element name="DESCRIPTION" value="DESCRIPTION" />
+        <element name="ASC" value="ASSET_CODE" />
+        <element name="LEGC" value="LEGACY_CODE" />
+        <element name="DESC" value="DESCRIPTION" />
         <element name="CAR" value="CAR" />
-        <element name="CAR_DESCRIPTION" value="CAR_DESCRIPTION" />
-        <element name="MANUFACTURER_NAME" value="MANUFACTURER_NAME" />
-        <element name="MANUFACTURER_NUMBER" value="MANUFACTURER_NUMBER" />
-        <element name="SERIAL_NUMBER" value="SERIAL_NUMBER" />
-        <element name="ASSET_TYPE" value="ASSET_TYPE" />
-        <element name="ATTRIBUTE_CATEGORY_CODE" value="ATTRIBUTE_CATEGORY_CODE" />
-        <element name="CLEARING_ACCOUNT" value="CLEARING_ACCOUNT" />
-        <element name="DATE_PLACED_IN_SERVICE" value="DATE_PLACED_IN_SERVICE" />
-        <element name="LIFE_IN_MONTHS" value="LIFE_IN_MONTHS" />
+        <element name="CARDES" value="CAR_DESCRIPTION" />
+        <element name="MANE" value="MANUFACTURER_NAME" />
+        <element name="MANU" value="MANUFACTURER_NUMBER" />
+        <element name="SERNU" value="SERIAL_NUMBER" />
+        <element name="AST" value="ASSET_TYPE" />
+        <element name="ATCC" value="ATTRIBUTE_CATEGORY_CODE" />
+        <element name="CLEARA" value="CLEARING_ACCOUNT" />
+        <element name="DATESER" value="DATE_PLACED_IN_SERVICE" />
+        <element name="LIFEM" value="LIFE_IN_MONTHS" />
         <element name="COST" value="COST" />
-        <element name="LOCATION" value="LOCATION" />
-        <element name="LOCATION_DESCRIPTION" value="LOCATION_DESCRIPTION" />
-        <element name="EMPLOYEE_ORACLE_NUMBER" value="EMPLOYEE_ORACLE_NUMBER" />
-        <element name="ORACLE_EMPLOYEE" value="ORACLE_EMPLOYEE" />
-        <element name="LEGACY_EMPLOYEE_NUMBER" value="LEGACY_EMPLOYEE_NUMBER" />
-        <element name="PO_NUMBER" value="PO_NUMBER" />
+        <element name="LOC" value="LOCATION" />
+        <element name="LOCDESC" value="LOCATION_DESCRIPTION" />
+        <element name="EMPLOYEEONU" value="EMPLOYEE_ORACLE_NUMBER" />
+        <element name="ORACLEEM" value="ORACLE_EMPLOYEE" />
+        <element name="LEGACYEMNU" value="LEGACY_EMPLOYEE_NUMBER" />
+        <element name="PONU" value="PO_NUMBER" />
         <element name="INVOICE" value="INVOICE" />
         <element name="SUPPLIER" value="SUPPLIER" />
-        <element name="PROYECTO_ACTIVO" value="PROYECTO_ACTIVO" />
-        <element name="DESCRIPTION_PROJECT" value="DESCRIPTION_PROJECT" />
+        <element name="PROAC" value="PROYECTO_ACTIVO" />
+        <element name="DESCPRO" value="DESCRIPTION_PROJECT" />
 		</group>  
 
 <group name="LEGAL_INFORMATION" source="Q2">
