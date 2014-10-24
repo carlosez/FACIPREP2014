@@ -11,9 +11,9 @@
   <sqlStatement name="Q1">
   <![CDATA[
 SELECT a.asset_number codigo
-      ,a.attribute1 codigo_legado
-      ,a.description
-      ,a.manufacturer_name marca
+      ,a.attribute1 LEGACY_CODE
+      ,BOLINF.XXSV_FA_REPORTS.sub_lat_chr(a.description)
+      ,a.manufacturer_name
       ,a.model_number
       ,a.serial_number
       ,a.asset_type
@@ -172,14 +172,14 @@ SELECT a.asset_number codigo
        || '-'
        || l.segment6
           LOCATION
-      , (SELECT FT1.DESCRIPTION
+      , BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT FT1.DESCRIPTION
            FROM FND_FLEX_VALUES FV1, FND_FLEX_VALUES_TL FT1
           WHERE FV1.FLEX_VALUE_ID = FT1.FLEX_VALUE_ID
             AND FV1.PARENT_FLEX_VALUE_LOW = 'SV'
             AND ft1.language = 'ESA'
             AND FV1.FLEX_VALUE_SET_ID = 1014903
-            AND FV1.FLEX_VALUE = L.SEGMENT5)
-          DESCRIPCION_LOCATION
+            AND FV1.FLEX_VALUE = L.SEGMENT5))
+          LOCATION_DESCRIPTION
       , (SELECT P.EMPLOYEE_NUMBER
            FROM fa.fa_distribution_history dh, PER_ALL_PEOPLE_F P
           WHERE dh.asset_id = b.asset_id
@@ -188,13 +188,13 @@ SELECT a.asset_number codigo
             AND dh.transaction_header_id_out IS NULL
             AND ROWNUM = 1)
           CODIGO_EMPLEADO_ORACLE
-      , (SELECT P.FULL_NAME
-           FROM fa.fa_distribution_history dh, PER_ALL_PEOPLE_F P
-          WHERE dh.asset_id = b.asset_id
-            AND DH.ASSIGNED_TO = P.PERSON_ID
-            AND dh.book_type_code = :P_BOOK_TYPE_CODE     /*b.book_type_code*/
-            AND dh.transaction_header_id_out IS NULL
-            AND ROWNUM = 1)
+      ,  BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT P.FULL_NAME
+          FROM fa_distribution_history dh, PER_ALL_PEOPLE_F P
+         WHERE     dh.asset_id = b.asset_id
+               AND DH.ASSIGNED_TO = P.PERSON_ID
+               AND dh.book_type_code = :P_BOOK_TYPE_CODE    /*b.book_type_code*/
+               AND dh.transaction_header_id_out IS NULL
+               AND ROWNUM = 1))
           EMPLEADO_ORACLE
       , (SELECT P.ATTRIBUTE1
            FROM fa.fa_distribution_history dh, PER_ALL_PEOPLE_F P
@@ -211,7 +211,7 @@ SELECT a.asset_number codigo
                    (SELECT MIN (invoice_transaction_id_in)
                       FROM fa.fa_asset_invoices ai2
                      WHERE ai2.asset_id = a.asset_id))
-          OC
+          PO_NUMBER
       , (SELECT MIN (invoice_number)
            FROM fa.fa_asset_invoices ai
           WHERE ai.asset_id = a.asset_id
@@ -219,7 +219,7 @@ SELECT a.asset_number codigo
                    (SELECT MIN (invoice_transaction_id_in)
                       FROM fa.fa_asset_invoices ai2
                      WHERE ai2.asset_id = a.asset_id))
-          FACTURA
+          INVOICE
       , (SELECT MIN (asu.vendor_name)
            FROM fa.fa_asset_invoices ai, ap_suppliers asu
           WHERE ai.asset_id = a.asset_id
@@ -228,13 +228,13 @@ SELECT a.asset_number codigo
                       FROM fa.fa_asset_invoices ai2
                      WHERE ai2.asset_id = a.asset_id)
             AND ai.po_vendor_id = asu.vendor_id)
-          PROVEEDOR
+          SUPPLIER
       ,   ak.segment1
        || '-'
        || ak.segment2
           PROYECTO
       ,                                              /* proyecto*/
-        (SELECT    FT1.DESCRIPTION
+        BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT    FT1.DESCRIPTION
                 || '-'
                 || FT2.DESCRIPTION
            FROM FND_FLEX_VALUES FV1
@@ -253,8 +253,8 @@ SELECT a.asset_number codigo
             AND ft1.language = 'ESA'
             AND ft2.language = 'ESA'
             AND FV1.FLEX_VALUE_SET_ID = 1014897
-            AND FV2.FLEX_VALUE_SET_ID = 1014898)
-          DESCRIPCION_PROYECTO          /* descripción del proyecto*/
+            AND FV2.FLEX_VALUE_SET_ID = 1014898))
+          DESCRIPTION_PROJECT          /* descripción del proyecto*/
   FROM apps.fa_additions_v a
       ,fa.fa_books b
       ,fa.fa_asset_keywords ak

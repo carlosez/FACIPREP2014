@@ -244,7 +244,7 @@ XMLPubTemplateExpUpload.sh $APPS_PASS \
     00\
     00 \
     XML-DATA-TEMPLATE \
-    XXSVCIPDT.xml
+    XXSVAUXDT.xml
 
 echo '+----------------------------------------------------------+'
 echo '| Carga de Template rtf                                    |'

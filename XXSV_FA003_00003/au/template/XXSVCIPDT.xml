@@ -12,7 +12,7 @@
 SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
        a.asset_number ASSET_CODE,
        a.attribute1 lEGACY_CODE,
-       a.description,
+       BOLINF.XXSV_FA_REPORTS.sub_lat_chr(a.description),
        (SELECT distinct CC.SEGMENT9
           FROM FA.FA_ASSET_INVOICES AI, GL.GL_CODE_COMBINATIONS CC
          WHERE AI.PAYABLES_CODE_COMBINATION_ID = CC.CODE_COMBINATION_ID
@@ -21,7 +21,7 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
                (SELECT MIN(ASSET_INVOICE_ID)
                   FROM FA.FA_ASSET_INVOICES AI2
                  WHERE AI2.ASSET_ID = A.ASSET_ID)) CAR,
-       (SELECT FVT.DESCRIPTION
+       BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT FVT.DESCRIPTION
           FROM FND_FLEX_VALUES     FV,
                FND_FLEX_VALUE_SETS FVS,
                FND_FLEX_VALUES_TL  FVT
@@ -38,9 +38,9 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
                    AND AI.ASSET_INVOICE_ID in
                        (SELECT MIN(ASSET_INVOICE_ID)
                           FROM FA.FA_ASSET_INVOICES AI2
-                         WHERE AI2.ASSET_ID = A.ASSET_ID))) CAR_DESCRIPTION,
+                         WHERE AI2.ASSET_ID = A.ASSET_ID)))) CAR_DESCRIPTION,
        a.manufacturer_name,
-       a.model_number MANUFACTURER_NUMBER,
+       a.model_number,
        a.serial_number,
        a.asset_type,
        a.attribute_category_code,
@@ -93,13 +93,13 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
        || '-'
        || lc.segment6
           LOCATION,
-          (SELECT FT1.DESCRIPTION
+          BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT FT1.DESCRIPTION
           FROM FND_FLEX_VALUES FV1, FND_FLEX_VALUES_TL FT1
          WHERE     FV1.FLEX_VALUE_ID = FT1.FLEX_VALUE_ID
                AND FV1.PARENT_FLEX_VALUE_LOW = 'SV'
                AND ft1.language = 'ESA'
                AND FV1.FLEX_VALUE_SET_ID = 1014903
-               AND FV1.FLEX_VALUE = LC.SEGMENT5)
+               AND FV1.FLEX_VALUE = LC.SEGMENT5))
           LOCATION_DESCRIPTION,
           (SELECT P.EMPLOYEE_NUMBER
           FROM fa_distribution_history dh, PER_ALL_PEOPLE_F P
@@ -109,13 +109,13 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
                AND dh.transaction_header_id_out IS NULL
                AND ROWNUM = 1)
           EMPLOYEE_ORACLE_NUMBER,
-          (SELECT P.FULL_NAME
+          BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT P.FULL_NAME
           FROM fa_distribution_history dh, PER_ALL_PEOPLE_F P
          WHERE     dh.asset_id = b.asset_id
                AND DH.ASSIGNED_TO = P.PERSON_ID
                AND dh.book_type_code = :P_BOOK_TYPE_CODE    /*b.book_type_code*/
                AND dh.transaction_header_id_out IS NULL
-               AND ROWNUM = 1)
+               AND ROWNUM = 1))
           ORACLE_EMPLOYEE,
           (SELECT P.ATTRIBUTE1
           FROM fa_distribution_history dh, PER_ALL_PEOPLE_F P
@@ -148,7 +148,7 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
                AND ai.po_vendor_id = asu.vendor_id)
           SUPPLIER,
            ak.segment1 || '-' || ak.segment2 PROYECTO_ACTIVO,
-           (SELECT FT1.DESCRIPTION || '-' || FT2.DESCRIPTION
+           BOLINF.XXSV_FA_REPORTS.sub_lat_chr((SELECT FT1.DESCRIPTION || '-' || FT2.DESCRIPTION
           FROM FND_FLEX_VALUES FV1,
                FND_FLEX_VALUES_TL FT1,
                FND_FLEX_VALUES FV2,
@@ -162,7 +162,7 @@ SELECT B.BOOK_TYPE_CODE company,TRANSACTION_DATE_ENTERED,
                AND ft1.language = 'ESA'
                AND ft2.language = 'ESA'
                AND FV1.FLEX_VALUE_SET_ID = 1014897
-               AND FV2.FLEX_VALUE_SET_ID = 1014898)
+               AND FV2.FLEX_VALUE_SET_ID = 1014898))
           DESCRIPTION_PROJECT, 
        B.COST,
        LC.SEGMENT1 || '-' || LC.SEGMENT2 || '-' || LC.SEGMENT3 || '-' ||
@@ -274,7 +274,7 @@ AND (AK.SEGMENT1 || '-' || AK.SEGMENT2) = NVL(:P_PROYECTO,(AK.SEGMENT1 || '-' ||
         <element name="CAR" value="CAR" />
         <element name="CARDES" value="CAR_DESCRIPTION" />
         <element name="MANE" value="MANUFACTURER_NAME" />
-        <element name="MANU" value="MANUFACTURER_NUMBER" />
+        <element name="MODELNU" value="MODEL_NUMBER" />
         <element name="SERNU" value="SERIAL_NUMBER" />
         <element name="AST" value="ASSET_TYPE" />
         <element name="ATCC" value="ATTRIBUTE_CATEGORY_CODE" />
